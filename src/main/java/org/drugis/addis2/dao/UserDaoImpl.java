@@ -1,7 +1,8 @@
-package org.drugis.addis2;
+package org.drugis.addis2.dao;
 
 import java.util.Collection;
 
+import org.drugis.addis2.model.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;

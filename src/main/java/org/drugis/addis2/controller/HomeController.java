@@ -1,9 +1,10 @@
-package org.drugis.addis2;
+package org.drugis.addis2.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import org.drugis.addis2.dao.UserDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
