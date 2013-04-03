@@ -234,7 +234,7 @@
                         </classpath>
                         <annotationconfiguration
                         	configurationfile="${project.basedir}/dbms/hibernate_export.cfg.xml"
-                        	namingstrategy="org.drugis.addis2.model.PluralizedNamingStrategy"/>
+                        	namingstrategy="org.drugis.common.hibernate.PluralizedNamingStrategy"/>
                         <hbm2ddl export="false" outputfilename="schema.ddl" format="true" />
                     </hibernatetool>
                 </configuration>
