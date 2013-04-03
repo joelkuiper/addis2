@@ -217,6 +217,20 @@
                     </connectors>
                 </configuration>
             </plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>hibernate3-maven-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<hibernatetool destdir="${project.basedir}/dbms">
+						<classpath>
+							<path path="${project.basedir}/target/classes" />
+						</classpath>
+						<annotationconfiguration configurationfile="${project.basedir}/dbms/hibernate_export.cfg.xml"/>
+						<hbm2ddl export="false" outputfilename="schema.ddl" format="true" />
+					</hibernatetool>
+				</configuration>
+			</plugin>
         </plugins>
     </build>
 </project>

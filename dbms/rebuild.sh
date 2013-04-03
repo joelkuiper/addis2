@@ -16,4 +16,4 @@ PGPASSWORD=$PRIV_PWD psql -h $HOST -p $PORT -U $PRIV_USER -c "DROP DATABASE IF E
 PGPASSWORD=$PRIV_PWD psql -h $HOST -p $PORT -U $PRIV_USER -d postgres -c "CREATE DATABASE $DATABASE ENCODING 'utf-8' OWNER $USER" || exit
 PGPASSWORD=$PRIV_PWD psql -h $HOST -p $PORT -U $PRIV_USER -d $DATABASE -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"' || exit
 
-PGPASSWORD=$APP_PWD psql -h $HOST -p $PORT -U $APP_USER --quiet --set ON_ERROR_STOP=1 -f structure.sql || exit
+PGPASSWORD=$APP_PWD psql -h $HOST -p $PORT -U $APP_USER --quiet --set ON_ERROR_STOP=1 -f schema.ddl || exit

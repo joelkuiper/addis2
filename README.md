@@ -11,6 +11,8 @@ Running
 	sudo -u postgres createuser -S -D -R addis 
 	sudo -u postgres psql -c "ALTER USER addis WITH PASSWORD 'develop'"
 
+	mvn compile
+	mvn org.codehaus.mojo:hibernate3-maven-plugin:hbm2ddl
 	cd dbms
 	./rebuild.sh
 	cd ..
