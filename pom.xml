@@ -123,13 +123,19 @@
         <!-- Hibernate -->
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-hibernate3</artifactId>
-            <version>2.0.8</version>
+            <artifactId>spring-orm</artifactId>
+            <version>${org.springframework-version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-annotations</artifactId>
-            <version>3.2.1.ga</version> <!-- must match spring-hibernate3 hibernate dependency version -->
+            <version>3.3.1.GA</version> <!-- must match spring-hibernate3 hibernate dependency version -->
+        </dependency>
+        
+        <dependency>
+            <groupId>net.java.dev.inflector</groupId>
+            <artifactId>inflector</artifactId>
+            <version>0.7.0</version>
         </dependency>
 
         <!-- Spring Security + OpenID -->
@@ -162,9 +168,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-        	<groupId>javax.servlet</groupId>
-        	<artifactId>jstl</artifactId>
-        	<version>1.2</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
         </dependency>
     </dependencies>
     <build>
@@ -217,20 +223,21 @@
                     </connectors>
                 </configuration>
             </plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>hibernate3-maven-plugin</artifactId>
-				<version>3.0</version>
-				<configuration>
-					<hibernatetool destdir="${project.basedir}/dbms">
-						<classpath>
-							<path path="${project.basedir}/target/classes" />
-						</classpath>
-						<annotationconfiguration configurationfile="${project.basedir}/dbms/hibernate_export.cfg.xml"/>
-						<hbm2ddl export="false" outputfilename="schema.ddl" format="true" />
-					</hibernatetool>
-				</configuration>
-			</plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>hibernate3-maven-plugin</artifactId>
+                <version>3.0</version>
+                <configuration>
+                    <hibernatetool destdir="${project.basedir}/dbms">
+                        <classpath>
+                            <path path="${project.basedir}/target/classes" />
+                        </classpath>
+                        <annotationconfiguration configurationfile="${project.basedir}/dbms/hibernate_export.cfg.xml" namingstrategy="org.drugis.addis2.model.PluralizedNamingStrategy"/>
+                        <hbm2ddl export="false" outputfilename="schema.ddl" format="true">
+                        </hbm2ddl>
+                    </hibernatetool>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>

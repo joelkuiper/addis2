@@ -1,25 +1,21 @@
 package org.drugis.addis2.model;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class User {
+public class Project {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) public Long id;
-	@Column(unique=true, nullable=false) public String openid;
-	
-	public User() {
-	}
-	
-	public User(String openid) {
-		this.openid = openid;
-	}
-	
-	@Override
-	public String toString() {
-		return openid;
-	}
+	@ManyToOne public User owner;
+	@Column public String shortName;
+	@Column public String description;
+	@Column public String objective;
+	@Column public Date createdAt;
+	@Column public Date updatedAt;
 }

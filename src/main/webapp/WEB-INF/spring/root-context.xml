@@ -24,11 +24,10 @@
 	      hibernate.show_sql=true
 	    </value>
 	  </property>
-	  <property name="annotatedClasses">
-	  	<list>
-	  		<value>org.drugis.addis2.model.User</value>
-	  	</list>
+	  <property name="packagesToScan">
+  		<value>org.drugis.addis2.model</value>
 	  </property>
+	  <property name="namingStrategy" ref="pluralizedNamingStrategy" />
 	</bean>
 	
 	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
@@ -37,4 +36,5 @@
 
 	<context:component-scan base-package="org.drugis.addis2.dao" />
 	<context:component-scan base-package="org.drugis.addis2.model" />
+	<context:component-scan base-package="org.drugis.common.hibernate" />
 </beans>
