@@ -4,43 +4,42 @@
 package org.drugis.addis2.controller;
 
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.drugis.addis2.dao.UserDao;
+import org.drugis.addis2.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-/**
- * Handles and retrieves the login or denied page depending on the URI template
- */
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
-	/**
-	 * Handles and retrieves the login JSP page
-	 * 
-	 * @return the name of the JSP page
-	 */
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String getLoginPage(@RequestParam(value="error", required=false) boolean error, 
-			ModelMap model) {
-		// Add an error message to the model if login is unsuccessful
-		// The 'error' parameter is set to true based on the when the authentication has failed. 
-		// We declared this under the authentication-failure-url attribute inside the spring-security.xml
-		/* See below:
-		 <form-login 
-				login-page="/krams/auth/login" 
-				authentication-failure-url="/krams/auth/login?error=true" 
-				default-target-url="/krams/main/common"/>
-		 */
+	public String getLoginPage(@RequestParam(value="error", required=false) boolean error, ModelMap model) {
 		if (error == true) {
-			// Assign an error message
 			model.put("error", "You have entered an invalid username or password!");
 		} else {
 			model.put("error", "");
 		}
-		
-		// This will resolve to /WEB-INF/jsp/loginpage.jsp
+
 		return "login";
+	}
+	
+	@Autowired private UserDao dao;
+	
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String getRegistrationPage(HttpServletRequest request,
+			@RequestParam(value="auto", required=false) boolean auto, ModelMap model) {
+		if (auto) {
+			String openid = (String) request.getSession().getAttribute("USER_OPENID_CREDENTIAL");
+			dao.save(new User(openid));
+			return "redirect:/";
+		} else {
+			return "login";
+		}
 	}
 }

@@ -1,4 +1,4 @@
 CREATE TABLE users (
-    id serial PRIMARY KEY,  
+    id bigserial PRIMARY KEY,  
     openid text not null unique
 );

@@ -8,16 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class UserDao {
-    protected HibernateTemplate template = null;
+	protected HibernateTemplate template = null;
 
 	/**
 	 * Sets Hibernate session factory and creates a 
 	 * <code>HibernateTemplate</code> from it.
 	 */
-	@Autowired
+	@Autowired(required=true)
 	public void setSessionFactory(SessionFactory sessionFactory) {
 	    template = new HibernateTemplate(sessionFactory);
 	}
@@ -41,7 +42,8 @@ public class UserDao {
 	/**
 	 * Saves person.
 	 */
+	@Transactional
 	public void save(User user) {
-	    template.saveOrUpdate(user);
+		template.saveOrUpdate(user);
 	}
 }
