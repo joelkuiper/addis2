@@ -9,10 +9,10 @@ import javax.persistence.Table;
 @Table(name="users")
 public class User {
 	@Id public long id;
-	@Column public String email;
+	@Column public String openid;
 	
 	@Override
 	public String toString() {
-		return email;
+		return openid;
 	}
 }

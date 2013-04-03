@@ -20,12 +20,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	private UserDao d_dao;
+	@Autowired private UserDao d_dao;
 	
-	@Autowired
-	public void setUserDao(UserDao dao) {
-		d_dao = dao;
-	}
+	
+//	public void setUserDao(UserDao dao) {
+//		d_dao = dao;
+//	}
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -46,4 +46,13 @@ public class HomeController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/blaat", method = RequestMethod.GET)
+	public String blaat(Locale locale, Model model) {
+		return "blaat";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(Locale locale, Model model) {
+		return "login";
+	}
 }
