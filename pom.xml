@@ -21,7 +21,7 @@
             <url>http://download.java.net/maven/2/</url>
         </repository>
     </repositories>
-    
+   
     <dependencies>
         <!-- Spring -->
         <dependency>
@@ -232,9 +232,10 @@
                         <classpath>
                             <path path="${project.basedir}/target/classes" />
                         </classpath>
-                        <annotationconfiguration configurationfile="${project.basedir}/dbms/hibernate_export.cfg.xml" namingstrategy="org.drugis.addis2.model.PluralizedNamingStrategy"/>
-                        <hbm2ddl export="false" outputfilename="schema.ddl" format="true">
-                        </hbm2ddl>
+                        <annotationconfiguration
+                        	configurationfile="${project.basedir}/dbms/hibernate_export.cfg.xml"
+                        	namingstrategy="org.drugis.addis2.model.PluralizedNamingStrategy"/>
+                        <hbm2ddl export="false" outputfilename="schema.ddl" format="true" />
                     </hibernatetool>
                 </configuration>
             </plugin>
