@@ -27,8 +27,9 @@
         <intercept-url pattern="/choices/**" access="hasRole('ROLE_ADMIN')"/>
  		-->
  		<intercept-url pattern="/" access="permitAll" />
+		<intercept-url pattern="/resources/**" access="permitAll" />
  		<intercept-url pattern="/auth/**" access="permitAll" />
- 		<intercept-url pattern="/blaat" access="isAuthenticated()" />
+ 		<intercept-url pattern="/**" access="isAuthenticated()" />
     </http>
 
 	<!-- Declare an authentication-manager to use a custom userDetailsService -->

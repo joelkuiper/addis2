@@ -1,8 +1,4 @@
-/**
- * 
- */
 package org.drugis.addis2.controller;
-
 
 import javax.servlet.http.HttpServletRequest;
 

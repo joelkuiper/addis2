@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:with="pageTitle='Projects'">
+<head th:include="main::head">
+</head>
+<body>
+<h1 th:text="${pageTitle}"></h1>
+
+<p th:text="${projects}" />
+</body>
+</html>
