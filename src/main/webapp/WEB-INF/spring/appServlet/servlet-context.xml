@@ -29,6 +29,7 @@
 		<beans:property name="prefix" value="/WEB-INF/templates/" />
 		<beans:property name="suffix" value=".html" />
 		<beans:property name="templateMode" value="HTML5" />
+		<beans:property name="cacheTTLMs" value="0" />
 	</beans:bean>
 	
 	<context:component-scan base-package="org.drugis.addis2.controller" />
