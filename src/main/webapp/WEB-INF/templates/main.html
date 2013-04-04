@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
 	<title th:inline="text">ADDIS 2 &mdash; [[${pageTitle}]]</title>
-	<link rel="icon" type="image/png" href="/resources/favicon.png"></link>
+	<link rel="icon" type="image/png" th:href="@{/resources/favicon.png}"></link>
 </head>
 <body>
 

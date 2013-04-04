@@ -6,11 +6,11 @@
 <h1 th:text="${pageTitle}"></h1>
 
 <ul th:each="project : ${projects}">
-	<li><span th:text="${project.shortName}"/><a th:href="@{'/projects/' + ${project.id} + '/edit'}">[edit]</a></li>
+	<li><span th:text="${project.shortName}"></span> <a th:href="@{'/projects/' + ${project.id} + '/edit'}">[edit]</a></li>
 </ul>
 
 <form action="" method="POST">
-	<input type="submit" />
+	<input title="New Project" type="submit" />
 </form>
 
 </body>
