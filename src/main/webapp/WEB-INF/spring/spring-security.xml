@@ -36,6 +36,6 @@
 	<authentication-manager>
         <authentication-provider user-service-ref="openIdUserDetailsService" />
 	</authentication-manager>
-	
+
 	<context:component-scan base-package="org.drugis.addis2.auth" />
 </beans:beans>

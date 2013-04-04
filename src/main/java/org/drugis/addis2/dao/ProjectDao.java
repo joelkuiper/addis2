@@ -19,4 +19,8 @@ public class ProjectDao extends AbstractHibernateDao {
 	public void save(Project project) {
 		template.saveOrUpdate(project);
 	}
+
+	public Project get(Long id) {
+		return template.get(Project.class, id);
+	}
 }
