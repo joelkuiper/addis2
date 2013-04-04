@@ -14,6 +14,12 @@ public class Project {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) public Long id;
 	@ManyToOne public User owner;
 	@Column public String shortName;
+	public String getShortName() {
+		return shortName;
+	}
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
 	@Column public String description;
 	@Column public String objective;
 	@Column public Date createdAt;

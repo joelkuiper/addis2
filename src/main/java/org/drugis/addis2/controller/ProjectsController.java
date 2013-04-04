@@ -7,10 +7,11 @@ import org.drugis.addis2.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
 @Controller
@@ -35,16 +36,16 @@ public class ProjectsController {
 	}
 	
 	@RequestMapping(value="/{id}/edit", method = RequestMethod.GET)
-	public String editForm(Model model, @PathVariable("id") Long id) {
-		model.addAttribute("project", d_projectDao.get(id));
+	public String editForm(ModelMap model, @PathVariable Long id) {
+		model.put("project", d_projectDao.get(id));
 		return "projects/edit";
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.POST)
-	public String editAction(Model model, @PathVariable("id") Long id,
-			@RequestParam(value="shortName", required=true) String shortName) {
-		Project project = d_projectDao.get(id);
-		project.shortName = shortName;
+	public String editAction(@PathVariable Long id, Project project, BindingResult br, ModelMap model) {
+		Project existing = d_projectDao.get(id);
+		project.id = id;
+		project.owner = existing.owner;
 		d_projectDao.save(project);
 		return "redirect:/projects";
 	}

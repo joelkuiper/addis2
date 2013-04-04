@@ -5,8 +5,8 @@
 <body>
 <h1 th:text="${pageTitle}"></h1>
 
-<form action="." method="POST">
-	<input name="shortName" th:value="${project.shortName}" type="text" />
+<form action="." method="POST" th:object="${project}">
+	<input th:field="*{shortName}" type="text" />
 	<input type="submit" />
 </form>
 
