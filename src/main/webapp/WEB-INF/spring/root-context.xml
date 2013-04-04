@@ -33,7 +33,9 @@
 	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 	  <property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-
+	
+	<bean id="pluralizedNamingStrategy" class="org.drugis.common.hibernate.PluralizedNamingStrategy" />
+		
 	<context:component-scan base-package="org.drugis.addis2.dao" />
 	<context:component-scan base-package="org.drugis.addis2.model" />
 	<context:component-scan base-package="org.drugis.common.hibernate" />

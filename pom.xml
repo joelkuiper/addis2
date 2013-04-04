@@ -20,6 +20,12 @@
             <id>java.net</id>
             <url>http://download.java.net/maven/2/</url>
         </repository>
+		<repository>
+			<id>drugis.org</id>
+			<name>drugis.org Maven 2 Repository</name>
+			<url>http://drugis.org/mvn</url>
+			<layout>default</layout>
+		</repository>
     </repositories>
    
     <dependencies>
@@ -138,11 +144,10 @@
             <artifactId>hibernate-annotations</artifactId>
             <version>3.3.1.GA</version> <!-- must match spring-hibernate3 hibernate dependency version -->
         </dependency>
-        
         <dependency>
-            <groupId>net.java.dev.inflector</groupId>
-            <artifactId>inflector</artifactId>
-            <version>0.7.0</version>
+            <groupId>org.drugis</groupId>
+            <artifactId>common-hibernate</artifactId>
+            <version>0.1-SNAPSHOT</version>
         </dependency>
 
         <!-- Spring Security + OpenID -->
@@ -206,14 +211,6 @@
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.2.1</version>
-                <configuration>
-                    <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
             <plugin>
