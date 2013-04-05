@@ -19,11 +19,11 @@ public class HomeController {
 	@Autowired private UserDao d_dao;
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home(Locale locale, final Model model) {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		model.addAttribute("serverTime", dateFormat.format(new Date()));
 		model.addAttribute("users", d_dao.findUsers().toString());
-		
+
 		return "home";
 	}
 }

@@ -141,8 +141,8 @@
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-annotations</artifactId>
-            <version>3.3.1.GA</version> <!-- must match spring-hibernate3 hibernate dependency version -->
+            <artifactId>hibernate-core</artifactId>
+            <version>4.1.10.Final</version>
         </dependency>
         <dependency>
             <groupId>org.drugis</groupId>

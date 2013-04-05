@@ -11,16 +11,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;    
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.WebRequest;
 
 @Service("openIdUserDetailsService") 
 public class OpenIdUserDetailsService implements UserDetailsService {
 	@Autowired(required=true) private UserDao d_dao;
 
-	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String openid) throws UsernameNotFoundException, DataAccessException {
 		Collection<User> users = d_dao.findUserByOpenId(openid);
 		if (users.isEmpty()) {

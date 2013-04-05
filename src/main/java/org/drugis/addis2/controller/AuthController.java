@@ -21,7 +21,6 @@ public class AuthController {
 		} else {
 			model.put("error", "");
 		}
-
 		return "login";
 	}
 	
