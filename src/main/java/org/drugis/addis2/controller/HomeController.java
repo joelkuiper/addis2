@@ -22,7 +22,6 @@ public class HomeController {
 	public String home(Locale locale, final Model model) {
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
 		model.addAttribute("serverTime", dateFormat.format(new Date()));
-		model.addAttribute("users", d_dao.findUsers().toString());
 
 		return "home";
 	}

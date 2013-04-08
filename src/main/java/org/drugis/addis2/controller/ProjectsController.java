@@ -31,7 +31,7 @@ public class ProjectsController {
 	public String createAction(WebRequest request) {
 		Project project = new Project();
 		project.owner = d_userService.getActiveUser(request);
-		d_projectDao.save(project);
+		project = d_projectDao.save(project);
 		return "redirect:/projects/" + project.id + "/edit";
 	}
 	

@@ -145,6 +145,11 @@
             <version>4.1.10.Final</version>
         </dependency>
         <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>4.1.10.Final</version>
+        </dependency>
+        <dependency>
             <groupId>org.drugis</groupId>
             <artifactId>common-hibernate</artifactId>
             <version>0.1-SNAPSHOT</version>
