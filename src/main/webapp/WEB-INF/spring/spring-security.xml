@@ -19,7 +19,7 @@
     		
         <logout
             invalidate-session="true"
-    		logout-success-url="/auth/login"
+    		logout-success-url="/"
         	logout-url="/auth/logout"/>
         
         <!-- Configure these elements to secure URIs in your application -->
