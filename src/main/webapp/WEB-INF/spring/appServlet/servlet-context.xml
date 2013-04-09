@@ -37,5 +37,7 @@
 		<beans:property name="cacheTTLMs" value="0" />
 	</beans:bean>
 	
+	<beans:bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
+	
 	<context:component-scan base-package="org.drugis.addis2.controller" />
 </beans:beans>

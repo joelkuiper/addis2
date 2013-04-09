@@ -19,7 +19,7 @@ import org.springframework.web.context.request.WebRequest;
 public class ProjectsController {
 	@Autowired private OpenIdUserDetailsService d_userService;
 	@Autowired private ProjectDao d_projectDao;
-
+	
 	@RequestMapping(value="", method = RequestMethod.GET)
 	public String list(Model model, WebRequest request) {
 		User user = d_userService.getActiveUser(request);
