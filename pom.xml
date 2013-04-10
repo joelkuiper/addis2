@@ -163,20 +163,18 @@
             <version>4.1.10.Final</version>
         </dependency>
         <dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-tools</artifactId>
+			<version>4.0.0-CR1</version>
+		</dependency>
+            
+        <dependency>
             <groupId>org.drugis</groupId>
             <artifactId>common-hibernate</artifactId>
             <version>0.1-SNAPSHOT</version>
         </dependency>
+        
 
-		<!--  required for 'mvn org.codehaus.mojo:hibernate3-maven-plugin:hbm2ddl' -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-commons-annotations</artifactId>
-			<version>3.3.0.ga</version>
-		</dependency>
-	            
-	
-	
 	    <!-- Spring Security + OpenID -->
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -265,22 +263,67 @@
                     </connectors>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>hibernate3-maven-plugin</artifactId>
-                <version>3.0</version>
-                <configuration>
-                    <hibernatetool destdir="${project.basedir}/dbms">
-                        <classpath>
-                            <path path="${project.basedir}/target/classes" />
-                        </classpath>
-                        <annotationconfiguration
-                        	configurationfile="${project.basedir}/dbms/hibernate_export.cfg.xml"
-                        	namingstrategy="org.drugis.common.hibernate.PluralizedNamingStrategy"/>
-                        <hbm2ddl export="false" outputfilename="schema.ddl" format="true" />
-                    </hibernatetool>
-                </configuration>
-            </plugin>
+	      <plugin>
+	        <artifactId>maven-antrun-plugin</artifactId>
+	        <version>1.7</version>
+	        <executions>
+	          <execution>
+	            <phase>generate-sources</phase>
+	            <configuration>
+	                <target name="schemaexport" description="Export schema to DDL file"> 
+					  <taskdef name="hibernatetool" classname="org.hibernate.tool.ant.HibernateToolTask" classpathref="maven.compile.classpath" />
+						<hibernatetool destdir="${project.basedir}/dbms">
+						<classpath>
+							<path path="${project.basedir}/target/classes" />
+						</classpath>
+						<annotationconfiguration
+							configurationfile="${project.basedir}/dbms/hibernate_export.cfg.xml"
+							namingstrategy="org.drugis.common.hibernate.PluralizedNamingStrategy" />
+						<hbm2ddl outputfilename="schema.ddl" format="true" export="false" drop="false" />
+					  </hibernatetool>
+					</target>
+	            </configuration>
+	            <goals>
+	              <goal>run</goal>
+	            </goals>
+	          </execution>
+	        </executions>
+	      </plugin>
         </plugins>
+        <pluginManagement>
+        	<plugins>
+        		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+        		<plugin>
+        			<groupId>org.eclipse.m2e</groupId>
+        			<artifactId>lifecycle-mapping</artifactId>
+        			<version>1.0.0</version>
+        			<configuration>
+        				<lifecycleMappingMetadata>
+        					<pluginExecutions>
+        						<pluginExecution>
+        							<pluginExecutionFilter>
+        								<groupId>
+        									org.apache.maven.plugins
+        								</groupId>
+        								<artifactId>
+        									maven-antrun-plugin
+        								</artifactId>
+        								<versionRange>
+        									[1.7,)
+        								</versionRange>
+        								<goals>
+        									<goal>run</goal>
+        								</goals>
+        							</pluginExecutionFilter>
+        							<action>
+        								<ignore></ignore>
+        							</action>
+        						</pluginExecution>
+        					</pluginExecutions>
+        				</lifecycleMappingMetadata>
+        			</configuration>
+        		</plugin>
+        	</plugins>
+        </pluginManagement>
     </build>
 </project>
