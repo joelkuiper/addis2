@@ -9,7 +9,7 @@
 	<li><span th:text="${project.shortName}"></span> <a th:href="@{'/projects/' + ${project.id} + '/edit'}">[edit]</a></li>
 </ul>
 
-<form action="" method="POST">
+<form intercept="" action="" method="POST">
 	<input title="New Project" type="submit" />
 </form>
 
