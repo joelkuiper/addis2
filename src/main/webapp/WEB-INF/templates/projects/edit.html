@@ -5,7 +5,7 @@
 <body>
 <h1 th:text="${pageTitle}"></h1>
 
-<form action="." method="POST" th:object="${project}">
+<form intercept="" th:action="@{.}" method="POST" th:object="${project}">
 	<input th:field="*{shortName}" type="text" />
 	<input type="submit" />
 </form>

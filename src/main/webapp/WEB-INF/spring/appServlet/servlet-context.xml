@@ -26,6 +26,7 @@
 		<beans:property name="additionalDialects">
 			<beans:set>
 				<beans:bean class="org.thymeleaf.extras.springsecurity3.dialect.SpringSecurityDialect" />
+				<beans:bean class="org.drugis.addis2.view.helper.OurDialect" />
 			</beans:set>
 		</beans:property>
 	</beans:bean>
@@ -38,6 +39,16 @@
 	</beans:bean>
 	
 	<beans:bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
+	
+	
+	<!-- CSRF protection -->
+	<!-- Data Value Processor -->
+	<beans:bean name="requestDataValueProcessor" class="org.drugis.addis2.controller.csrf.CSRFRequestDataValueProcessor"/>
+	
+	<interceptors>
+		<beans:bean class="org.drugis.addis2.controller.csrf.CSRFHandlerInterceptor" />
+	</interceptors>
+	
 	
 	<context:component-scan base-package="org.drugis.addis2.controller" />
 </beans:beans>
