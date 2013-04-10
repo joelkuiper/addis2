@@ -113,6 +113,20 @@
             <scope>provided</scope>
         </dependency>
         
+		<!-- Utilities -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>0.11.6</version>
+			<scope>provided</scope>
+		</dependency>
+				
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>14.0.1</version>
+		</dependency>
+		
         <!-- ThymeLeaf template engine -->
         <dependency>
 			<groupId>org.thymeleaf</groupId>
