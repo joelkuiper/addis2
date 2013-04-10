@@ -7,17 +7,16 @@
 
 <form intercept="" th:action="@{.}" method="POST" th:object="${project}">
 	<input th:field="*{shortName}" type="text" />
+	<select th:field="*{population.indication}"></select>
 	<input type="submit" />
 </form>
 
-<select id="indications"> 
-</select>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script th:inline="text">
 window.dataUrl = "[[@{/data}]]";
 </script>
-<script th:src="@{/resources/indications.js}"></script>
+<script th:src="@{/resources/js/indications.js}"></script>
 
 </body>
 </html>

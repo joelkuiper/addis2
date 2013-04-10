@@ -13,22 +13,17 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public class ProjectDao {
-	@PersistenceContext EntityManager d_em;
+public class ProjectDao extends GenericDao<Project, Long> {
+	
+	public ProjectDao() {
+		super(Project.class);
+	}
 
 	@Transactional(readOnly=true)
 	public Collection<Project> findProjectsByOwner(User user) throws DataAccessException {
-		TypedQuery<Project> query = d_em.createQuery("from Project p where p.owner = :user", Project.class).setParameter("user", user);
+		TypedQuery<Project> queryTpl= getEntityManager().createQuery("from Project p where p.owner = :user", Project.class);
+		TypedQuery<Project> query = queryTpl.setParameter("user", user);
 		return query.getResultList();
 	}
 
-	@Transactional
-	public Project save(Project project) {
-		return d_em.merge(project);
-	}
-
-	@Transactional(readOnly=true)
-	public Project get(Long id) {
-		return d_em.find(Project.class, id);
-	}
 }

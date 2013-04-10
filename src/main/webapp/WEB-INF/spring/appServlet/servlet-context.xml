@@ -32,7 +32,7 @@
 	</beans:bean>
 	
 	<beans:bean id="templateResolver" class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">
-		<beans:property name="prefix" value="/WEB-INF/templates/" />
+		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".html" />
 		<beans:property name="templateMode" value="HTML5" />
 		<beans:property name="cacheTTLMs" value="0" />
@@ -48,7 +48,6 @@
 	<interceptors>
 		<beans:bean class="org.drugis.addis2.controller.csrf.CSRFHandlerInterceptor" />
 	</interceptors>
-	
 	
 	<context:component-scan base-package="org.drugis.addis2.controller" />
 </beans:beans>
