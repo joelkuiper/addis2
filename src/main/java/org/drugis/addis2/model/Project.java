@@ -20,4 +20,5 @@ public @Data class Project {
 	@Column public String objective;
 	@Column public Date createdAt;
 	@Column public Date updatedAt;
+	@ManyToOne public Population population;
 }

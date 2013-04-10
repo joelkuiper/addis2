@@ -9,6 +9,7 @@
         <!-- mappings for annotated classes -->
         <mapping class="org.drugis.addis2.model.User"/>
         <mapping class="org.drugis.addis2.model.Project"/>
+        <mapping class="org.drugis.addis2.model.Population"/>
         
     </session-factory>
 </hibernate-configuration>

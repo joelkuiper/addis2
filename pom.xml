@@ -168,7 +168,16 @@
             <version>0.1-SNAPSHOT</version>
         </dependency>
 
-        <!-- Spring Security + OpenID -->
+		<!--  required for 'mvn org.codehaus.mojo:hibernate3-maven-plugin:hbm2ddl' -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-commons-annotations</artifactId>
+			<version>3.3.0.ga</version>
+		</dependency>
+	            
+	
+	
+	    <!-- Spring Security + OpenID -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
