@@ -33,6 +33,17 @@
 		<beans:property name="suffix" value=".html" />
 		<beans:property name="templateMode" value="HTML5" />
 	</beans:bean>
+
+
+	<beans:bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<beans:property name="webBindingInitializer">
+			<beans:bean class="org.springframework.web.bind.support.ConfigurableWebBindingInitializer">
+				<beans:property name="propertyEditorRegistrars">
+					<beans:bean class="org.springframework.data.repository.support.DomainClassPropertyEditorRegistrar" />
+				</beans:property>
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
 	
 	<!-- CSRF protection -->
 	<!-- Data Value Processor -->
