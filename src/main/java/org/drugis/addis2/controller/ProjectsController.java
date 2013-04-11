@@ -8,7 +8,6 @@ import org.drugis.addis2.model.Project;
 import org.drugis.addis2.model.User;
 import org.drugis.addis2.repositories.ProjectRepository;
 import org.drugis.addis2.repositories.UserRepository;
-import org.drugis.addis2.view.error.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
@@ -52,8 +51,8 @@ public class ProjectsController {
 	}
 	
 	@RequestMapping(value="/{id}/edit", method = RequestMethod.GET)
-	public String editForm(Principal principal, ModelMap model, @PathVariable("id") Project project) {
-		if(project == null) throw new ResourceNotFoundException();
+	public String editForm(Principal principal, ModelMap model, @PathVariable Long id) {
+		Project project = d_projects.findOne(id);
 		if(userIsAuthorized(project.owner, principal)) { 
 			model.addAttribute("project", project);
 		}
@@ -62,11 +61,12 @@ public class ProjectsController {
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.POST)
 	public String editAction(Principal principal,
-			@PathVariable("id") Project existing, 
+			@PathVariable Long id, 
 			Project project, 
 			ModelMap model) {
+		Project existing = d_projects.findOne(id);
 		if(userIsAuthorized(existing.owner, principal)) { 
-			project.id = existing.id;
+			project.id = id;
 			project.owner = existing.owner;
 			d_projects.save(project);
 		}  
