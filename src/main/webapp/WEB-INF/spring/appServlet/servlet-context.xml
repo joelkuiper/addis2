@@ -9,9 +9,6 @@
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
-	<!-- Enables the Spring MVC @Controller programming model -->
-	<annotation-driven />
-
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/favicon.ico" location="/favicon.ico" />
@@ -35,11 +32,7 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".html" />
 		<beans:property name="templateMode" value="HTML5" />
-		<beans:property name="cacheTTLMs" value="0" />
 	</beans:bean>
-	
-	<beans:bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
-	
 	
 	<!-- CSRF protection -->
 	<!-- Data Value Processor -->
@@ -49,5 +42,4 @@
 		<beans:bean class="org.drugis.addis2.controller.csrf.CSRFHandlerInterceptor" />
 	</interceptors>
 	
-	<context:component-scan base-package="org.drugis.addis2.controller" />
 </beans:beans>
