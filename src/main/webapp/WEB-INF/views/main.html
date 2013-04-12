@@ -2,10 +2,34 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title th:inline="text">ADDIS 2 &mdash; [[${pageTitle}]]</title>
-	<link rel="icon" type="image/png" th:href="@{/resources/favicon.png}"></link>
+	<link rel="icon" type="image/png" th:href="@{/resources/favicon.png}" />
+	<link rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}" media="screen" />
+	<link rel="stylesheet" th:href="@{/resources/css/select2.css}" media="screen" />
 </head>
 <body>
+
+<footer th:fragment="footer">
+	<script th:src="@{/resources/js/vendor/jquery-1.9.1.js}" src="//code.jquery.com/jquery.js"></script>
+	<script th:src="@{/resources/js/vendor/bootstrap.js}" src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+	<script th:src="@{/resources/js/vendor/angular.js}" src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+	<script th:src="@{/resources/js/vendor/angular-ui.min.js}" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>
+	<script th:src="@{/resources/js/vendor/select2.min.js}" src="//cdnjs.cloudflare.com/ajax/libs/select2/3.3.2/select2.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	    window.config = {};
+		window.config.dataUrl = [[@{/data}]];
+	/*]]>*/
+	</script>
+	<script th:src="@{/resources/js/app.js}"></script>
+	<script th:src="@{/resources/js/services.js}"></script>
+	<script th:src="@{/resources/js/controllers.js}"></script>
+	<script th:src="@{/resources/js/directives.js}"></script>
+</footer>
 
 </body>
 </html>
