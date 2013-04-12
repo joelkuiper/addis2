@@ -66,10 +66,11 @@ public class ProjectsController {
 			ModelMap model) {
 		Project existing = d_projects.findOne(id);
 		if(userIsAuthorized(existing.owner, principal)) { 
-			project.id = id;
-			project.owner = existing.owner;
-			d_projects.save(project);
-		}  
+			existing.description = project.description;
+			existing.shortName = project.shortName;
+			existing.population.indicationConceptUrl = project.population.indicationConceptUrl;
+			d_projects.save(existing);
+		}
 		return "redirect:/projects";
 	}
 }

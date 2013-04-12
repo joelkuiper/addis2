@@ -23,5 +23,5 @@ public @Data class Project {
 	@Column public String objective;
 	@Column @CreatedDate public Date createdAt;
 	@Column public Date updatedAt;
-	@ManyToOne(cascade = CascadeType.PERSIST) public Population population;
+	@ManyToOne(cascade = CascadeType.ALL) public Population population;
 }
