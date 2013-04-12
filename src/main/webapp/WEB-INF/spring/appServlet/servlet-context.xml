@@ -32,6 +32,7 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".html" />
 		<beans:property name="templateMode" value="HTML5" />
+		<beans:property name="cacheTTLMs" value="0" />
 	</beans:bean>
 	
 	<!-- CSRF protection -->
