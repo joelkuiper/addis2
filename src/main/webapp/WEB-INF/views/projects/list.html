@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" th:with="pageTitle='Projects'">
-<head th:include="main::head">
-</head>
+<head th:include="main::head"></head>
+
 <body>
-<h1 th:text="${pageTitle}"></h1>
-
-<ul th:each="project : ${projects}">
-	<li><span th:text="${project.shortName}"></span> <a th:href="@{'/projects/' + ${project.id} + '/edit'}">[edit]</a></li>
-</ul>
-
-<form intercept="" action="" method="POST">
-	<input title="New Project" type="submit" />
-</form>
-
+<div class="container-fluid">
+	<h1 th:text="${pageTitle}"></h1>
+	
+	<ul th:each="project : ${projects}">
+		<li><span th:text="${project.shortName}"></span> <a th:href="@{'/projects/' + ${project.id} + '/edit'}">[edit]</a></li>
+	</ul>
+	
+	<form intercept="" action="" method="POST">
+		<input title="New Project" type="submit" />
+	</form>
+	
+	<footer th:include="main::footer"></footer>
+</div>
 </body>
 </html>

@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/security">
-<head th:with="pageTitle='Home'" th:include="main::head">
-</head>
+<head th:with="pageTitle='Home'" th:include="main::head"></head>
+
 <body>
-<h1>
-	Hello world!
-</h1>
-
-<p th:inline="text">The time on the server is [[${serverTime}]].</p>
-
-<p sec:authorize-url="@{/projects}"><a th:href="@{/projects}">Projects</a></p>
-
-<p><a th:href="@{/auth/login}">Login</a></p>
-<p><a th:href="@{/auth/logout}">Logout</a></p>
-
+<div class="container-fluid">
+	<h1>
+		Hello world!
+	</h1>
+	
+	<p th:inline="text">The time on the server is [[${serverTime}]].</p>
+	
+	<p sec:authorize-url="@{/projects}"><a th:href="@{/projects}">Projects</a></p>
+	
+	<p><a th:href="@{/auth/login}">Login</a></p>
+	<p><a th:href="@{/auth/logout}">Logout</a></p>
+	</div>
+<footer th:include="main::footer"></footer>
 </body>
 </html>

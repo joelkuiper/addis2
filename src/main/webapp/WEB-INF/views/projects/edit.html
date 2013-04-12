@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:with="pageTitle='Edit Project'">
-<head th:include="main::head">
-</head>
+<html ng-app="addis" xmlns:th="http://www.thymeleaf.org" th:with="pageTitle='Edit Project'">
+<head th:include="main::head"></head>
+
 <body>
-<h1 th:text="${pageTitle}"></h1>
-
-<form intercept="" th:action="@{.}" method="POST" th:object="${project}">
-	<input th:field="*{shortName}" type="text" />
-	<select th:field="*{population.indicationConceptUrl}" id="indications"></select>
-	<input type="submit" />
-</form>
-
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script th:inline="text">
-window.dataUrl = "[[@{/data}]]";
-</script>
-<script th:src="@{/resources/js/indications.js}"></script>
-
+<div class="container-fluid">
+	<h1 th:text="${pageTitle}"></h1>
+	
+	<form intercept="" ng-controller="PopulationsController" th:action="@{.}" method="POST" th:object="${project}">
+		<label>Short name</label>
+		<input th:field="*{id}" type="hidden" />
+		<input th:field="*{shortName}" type="text" />
+		
+		<label>Description</label>
+		<textarea th:field="*{description}"></textarea>
+	
+		<label>Indication</label>
+		<input th:field="*{population.indicationConceptUrl}" type="text" ui-select2="indications" ng-model="indication" class="input-large" />
+		<br />
+		<button type="submit" class="btn">Save</button>
+	</form>
+	<footer th:include="main::footer"></footer>
+</div>
 </body>
 </html>
