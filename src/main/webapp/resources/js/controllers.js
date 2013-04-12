@@ -1,11 +1,15 @@
-app.controller('PopulationsController', function($scope) {
+app.controller('PopulationsController', function($scope, $http) {
 	$scope.indication = {};
+	var id = document.getElementById("population.indicationConceptUrl").getAttribute("value");
+    if(id !== "") { 
+    	$http.get(id).success(function(data) {
+        	$scope.indication = {"id":id, "text": data.name};
+    	});
+    }
+    
 	$scope.indications = {	       
 		initSelection : function (element, callback) {
-	        var id = $(element).attr("value");
-	        $.get(id, function(data) { 
-		        callback({"id":id, "text": data.name});
-	        });
+			  callback($(element).data('$ngModelController').$modelValue);
 	    },
 		ajax : {
 			url : config.dataUrl + "/indications",
