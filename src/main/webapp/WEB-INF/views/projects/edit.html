@@ -2,23 +2,31 @@
 <html ng-app="addis" xmlns:th="http://www.thymeleaf.org" th:with="pageTitle='Edit Project'">
 <head th:include="main::head"></head>
 
-<body>
+<body ng-controller="PopulationsController">
 <div class="container-fluid">
 	<h1 th:text="${pageTitle}"></h1>
 	
-	<form intercept="" ng-controller="PopulationsController" th:action="@{.}" method="POST" th:object="${project}">
+	<form intercept="" th:action="@{.}" method="POST">
 		<label>Short name</label>
-		<input th:field="*{id}" type="hidden" />
-		<input th:field="*{shortName}" type="text" />
+		<input ng-model="project.id" type="hidden" />
+		<input ng-model="project.shortName" type="text" />
 		
 		<label>Description</label>
-		<textarea th:field="*{description}"></textarea>
+		<textarea ng-model="project.description"></textarea>
 	
 		<label>Indication</label>
-		<input th:field="*{population.indicationConceptUrl}" type="text" ui-select2="indications" ng-model="indication" class="input-large" />
+		<input type="text" ui-select2="populationSelect" ng-model="_population" class="input-large" />
+		
 		<br />
-		<button type="submit" class="btn">Save</button>
-	</form>
+		<label>Interventions</label> 
+		<input id="interventions" ui-select2="interventionsSelect" multiple="multiple" ng-model="_interventions" class="input-large" />
+		<pre>
+		{{project | json}}
+		{{_interventions | json}}
+		</pre>	
+		<button type="button" class="btn" ng-click="save()">Save</button>
+		</form>
+
 	<footer th:include="main::footer"></footer>
 </div>
 </body>

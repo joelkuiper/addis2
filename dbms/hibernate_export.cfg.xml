@@ -10,6 +10,7 @@
         <mapping class="org.drugis.addis2.model.User"/>
         <mapping class="org.drugis.addis2.model.Project"/>
         <mapping class="org.drugis.addis2.model.Population"/>
+        <mapping class="org.drugis.addis2.model.Intervention"/>
         
     </session-factory>
 </hibernate-configuration>

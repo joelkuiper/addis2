@@ -18,7 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @Controller
 @RequestMapping("/data")
-public class TrialVerseProxyController {
+public class TrialverseProxyController {
 	@Autowired private RestTemplate d_rest;
 	
 	public static List<Map<String, String>> createPaginationLinks(String baseUrl, String repositoryName, int limit, Map<String, Integer> pageInfo) {
@@ -56,15 +56,23 @@ public class TrialVerseProxyController {
 	public @ResponseBody Object getIndications(
 			@RequestParam(defaultValue="1") Integer page,
 			@RequestParam(defaultValue="20") Integer limit,
+			@RequestParam(defaultValue="") String q,
 			HttpServletRequest request) {
 		final String baseUrl = request.getRequestURL().toString();
 		@SuppressWarnings("rawtypes")
 		Map object = d_rest.getForObject(
-				"{trialVerse}/concepts/search/type?type=INDICATION&page={page}&limit={limit}",
-				Map.class, d_trialVerse, page, limit);
+				"{trialVerse}/concepts/search/typeAndName?type=INDICATION&page={page}&limit={limit}&q={q}",
+				Map.class, d_trialVerse, page, limit, q);
 		object.put("links", createPaginationLinks(baseUrl, "indications", limit,
 				(Map<String, Integer>) object.get("page")));
 		return object;
 	}
 	
+	@RequestMapping("/treatments")
+	public @ResponseBody Object getTreatments(
+			@RequestParam String indication) {
+		return d_rest.getForObject(
+				"{concept}/treatments",
+				Object.class, indication);
+	}
 }

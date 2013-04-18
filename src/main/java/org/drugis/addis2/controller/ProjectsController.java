@@ -2,26 +2,34 @@ package org.drugis.addis2.controller;
 
 
 import java.security.Principal;
+import java.util.ArrayList;
 
+import org.drugis.addis2.model.Intervention;
 import org.drugis.addis2.model.Population;
 import org.drugis.addis2.model.Project;
 import org.drugis.addis2.model.User;
 import org.drugis.addis2.repositories.ProjectRepository;
 import org.drugis.addis2.repositories.UserRepository;
+import org.drugis.addis2.service.TrialverseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping("/projects")
 public class ProjectsController {
 	@Autowired private ProjectRepository d_projects;
 	@Autowired private UserRepository d_users;
+	
+	@Autowired TrialverseService d_trialverseService;
 
 	private User getActiveUser(Principal principal) { 
 		return d_users.findByOpenid(principal.getName());
@@ -59,18 +67,29 @@ public class ProjectsController {
 		return "projects/edit";
 	}
 	
-	@RequestMapping(value="/{id}", method = RequestMethod.POST)
+	@ResponseBody
+	@RequestMapping(value="/{id}", method = RequestMethod.GET, produces = {"application/json"})
+	public Project getProject(Principal principal, ModelMap model, @PathVariable Long id) {
+		Project project = d_projects.findOne(id);
+		for (Intervention intervention : project.interventions) {
+			d_trialverseService.fetchConceptProperties(intervention);
+		}
+		d_trialverseService.fetchConceptProperties(project.population);
+		return project;
+	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.POST, consumes = {"application/json"})
 	public String editAction(Principal principal,
 			@PathVariable Long id, 
-			Project project, 
-			ModelMap model) {
+			@RequestBody Project project) {
 		Project existing = d_projects.findOne(id);
 		if(userIsAuthorized(existing.owner, principal)) { 
 			existing.description = project.description;
 			existing.shortName = project.shortName;
-			existing.population.indicationConceptUrl = project.population.indicationConceptUrl;
+			existing.population.conceptUrl = project.population.conceptUrl;
+			existing.interventions = project.interventions;
 			d_projects.save(existing);
 		}
-		return "redirect:/projects";
+		return "redirect:/projects/" + id;
 	}
 }

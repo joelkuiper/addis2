@@ -1,6 +1,5 @@
 package org.drugis.addis2.model;
 
-
 import java.util.Map;
 
 import javax.persistence.Column;
@@ -15,8 +14,9 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import lombok.Data;
 
 @Entity
-public @Data class Population implements Concept {
+public @Data class Intervention implements Concept {
 	@Id @JsonIgnore @GeneratedValue(strategy=GenerationType.IDENTITY) public Long id;
-	@Column public String conceptUrl;
+	@Column public String conceptUrl; 
+	
 	@Transient public Map<String, Object> conceptProperties;
 }

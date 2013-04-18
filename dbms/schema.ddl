@@ -1,8 +1,19 @@
 
+    create table interventions (
+        id  bigserial not null,
+        concept_url varchar(255),
+        primary key (id)
+    );
+
     create table populations (
         id  bigserial not null,
-        indication_concept_url varchar(255),
+        concept_url varchar(255),
         primary key (id)
+    );
+
+    create table project_interventions (
+        project int8 not null,
+        interventions int8 not null
     );
 
     create table projects (
@@ -22,6 +33,19 @@
         openid varchar(255) not null,
         primary key (id)
     );
+
+    alter table project_interventions 
+        add constraint UK557C39D6840FFC7C unique (interventions);
+
+    alter table project_interventions 
+        add constraint FK557C39D6D6052905 
+        foreign key (interventions) 
+        references interventions;
+
+    alter table project_interventions 
+        add constraint FK557C39D6BC260140 
+        foreign key (project) 
+        references projects;
 
     alter table projects 
         add constraint FKC479187A810DFE30 
