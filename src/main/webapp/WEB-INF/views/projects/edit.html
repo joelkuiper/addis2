@@ -5,7 +5,9 @@
 <body ng-controller="PopulationsController">
 <div class="container-fluid">
 	<h1 th:text="${pageTitle}"></h1>
-	
+	<div  ng-repeat="alert in alerts" ng-cloak="">
+	  	<div class="{{alert.type}} alert">{{alert.msg}}<a href="#" class="close" data-dismiss="alert">&times;</a></div>
+  	</div>
 	<form intercept="" th:action="@{.}" method="POST">
 		<label>Short name</label>
 		<input ng-model="project.id" type="hidden" />
@@ -14,18 +16,21 @@
 		<label>Description</label>
 		<textarea ng-model="project.description"></textarea>
 	
-		<label>Indication</label>
+		<br />
+		<label>Population</label>
 		<input type="text" ui-select2="populationSelect" ng-model="_population" class="input-large" />
 		
 		<br />
-		<label>Interventions</label> 
+		<label>Interventions (and Control)</label> 
 		<input id="interventions" ui-select2="interventionsSelect" multiple="multiple" ng-model="_interventions" class="input-large" />
-		<pre>
-		{{project | json}}
-		{{_interventions | json}}
-		</pre>	
+		
+		<br />
+		<label>Outcomes</label> 
+		<input id="outcomes" ui-select2="outcomesSelect" multiple="multiple" ng-model="_outcomes" class="input-large" />
+		
+		<br />
 		<button type="button" class="btn" ng-click="save()">Save</button>
-		</form>
+	</form>
 
 	<footer th:include="main::footer"></footer>
 </div>

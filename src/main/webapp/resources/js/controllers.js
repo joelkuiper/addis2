@@ -1,7 +1,5 @@
 app.controller('PopulationsController', function($scope, $http) {
 	$scope.project = {};
-	$scope.interventionUrl = "";
-	$scope.interventionUrlFn = function() { return $scope.interventionUrl; };
 
 	function getContentForConcept(concept) { 
 		var names = _.pluck(concept, 'name');
@@ -13,69 +11,89 @@ app.controller('PopulationsController', function($scope, $http) {
 		}, []);
     }
 
-	$scope.populationSelect = {	       
-		ajax : {
-			url : config.dataUrl + "/indications",
-			data : function(term, page) {
-				return {q: term};
-			},
 	
-			results : function(data, page) {				
-				return {
-					results : getContentForConcept(data.content)
-				};
-			}
-		}
-	};
-	
-	$scope.interventionsSelect = {
-		multiple: true,
-		ajax : {
-			url : $scope.interventionUrlFn,
-			data : function(term, page) {
-				return {q: term};
-			},
-	
-			results : function(data, page) {
-				var results = getContentForConcept(data);
-				return {
-					results : results
-				};
-			}
-		}
-	};
+	function createSelectOptions(url, contentCallback) { 
+		return { 
+			ajax : {
+				url : url,
+				data : function(term, page) {
+					return {q: term};
+				},
 		
-    $http.get(".").success(function(data) { 
+				results : function(data, page) {				
+					return {
+						results : contentCallback(data)
+					};
+				}
+			}
+		};
+	}
+	
+	$scope.populationSelect = 
+		createSelectOptions(
+			config.dataUrl + "/indications", 
+			function(data) { return getContentForConcept(data.content); }
+		);
+	
+	$scope.interventionsSelect = 
+		createSelectOptions(
+			function() { return config.dataUrl + "/treatments?indication=" + $scope._population.id; },
+			function(data) { return getContentForConcept(data); }
+		);
+	$scope.outcomesSelect = 
+		createSelectOptions(
+			function() { return config.dataUrl + "/variables?indication=" + $scope._population.id; },
+			function(data) { return getContentForConcept(data); }
+		);
+	
+	var setProject = function(data) {
 		$scope.project = data;
-
-	$scope._interventions = [];
-		$scope._population = {id: data.population.conceptUrl, text: data.population.conceptProperties.name};
+		
+		$scope._population = {
+			fresh: true,
+			id: data.population.conceptUrl,
+			text: data.population.conceptProperties ? data.population.conceptProperties.name : ""
+		};
+		
+		$scope._interventions = [];
 		angular.forEach(data.interventions, function(intervention) {
 			$scope._interventions.push({id: intervention.conceptUrl, text: intervention.conceptProperties.name});
 		});
-	});
+		
+		$scope._outcomes = [];
+		angular.forEach(data.outcomes, function(outcome) {
+			$scope._outcomes.push({id: outcome.conceptUrl, text: outcome.conceptProperties.name});
+		});
+	};
+		
+    $http.get(".").success(setProject);
     
 	$scope.$watch('_population', function() {
-		if($scope.interventionUrl !== "") { 
+		if($scope._population && !$scope._population.fresh) { 
 			$scope._interventions = [];
-		}
-		if($scope._population && $scope._population.id) {  
-			var url = config.dataUrl + "/treatments?indication=" + $scope._population.id;
-			$scope.interventionUrl = url;
+			$scope._outcomes = [];
 		}
 	});
 	
-	$scope.save = function() { 
+	$scope.save = function() {
 		$scope.project.population = {conceptUrl: $scope._population.id};
 		$scope.project.interventions = [];
+		$scope.project.outcomes = [];
 
 		angular.forEach($scope._interventions, function(intervention) { 
 			$scope.project.interventions.push({conceptUrl: intervention.id});
 		});
-
-		$http.post(".", $scope.project).success(function(data, status, headers) { 
-			console.log(data);
+		angular.forEach($scope._outcomes, function(outcome) { 
+			$scope.project.outcomes.push({conceptUrl: outcome.id});
+		});
+		$http.post(".", $scope.project)
+		.success(function(data) { 
+		    $scope.alerts.push({ type: 'alert-success', msg: 'Updated project!' }); 
+			setProject(data);
+		})
+		.error(function(data, status, header) { 
+		    console.error(data);
+		    $scope.alerts.push({ type: 'alert-error', msg: 'Failed to update the project. HTTP status: ' + status });
 		});
 	};
-	
 });

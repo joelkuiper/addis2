@@ -75,4 +75,12 @@ public class TrialverseProxyController {
 				"{concept}/treatments",
 				Object.class, indication);
 	}
+	
+	@RequestMapping("/variables")
+	public @ResponseBody Object getVariables(
+			@RequestParam String indication) {
+		return d_rest.getForObject(
+				"{concept}/variables",
+				Object.class, indication);
+	}
 }

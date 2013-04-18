@@ -5,6 +5,12 @@
         primary key (id)
     );
 
+    create table outcomes (
+        id  bigserial not null,
+        concept_url varchar(255),
+        primary key (id)
+    );
+
     create table populations (
         id  bigserial not null,
         concept_url varchar(255),
@@ -14,6 +20,11 @@
     create table project_interventions (
         project int8 not null,
         interventions int8 not null
+    );
+
+    create table project_outcomes (
+        project int8 not null,
+        outcomes int8 not null
     );
 
     create table projects (
@@ -44,6 +55,19 @@
 
     alter table project_interventions 
         add constraint FK557C39D6BC260140 
+        foreign key (project) 
+        references projects;
+
+    alter table project_outcomes 
+        add constraint UKBC9A35C7374E361 unique (outcomes);
+
+    alter table project_outcomes 
+        add constraint FKBC9A35C7A28655C1 
+        foreign key (outcomes) 
+        references outcomes;
+
+    alter table project_outcomes 
+        add constraint FKBC9A35C7BC260140 
         foreign key (project) 
         references projects;
 

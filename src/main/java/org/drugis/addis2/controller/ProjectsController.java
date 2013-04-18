@@ -2,9 +2,9 @@ package org.drugis.addis2.controller;
 
 
 import java.security.Principal;
-import java.util.ArrayList;
 
 import org.drugis.addis2.model.Intervention;
+import org.drugis.addis2.model.Outcome;
 import org.drugis.addis2.model.Population;
 import org.drugis.addis2.model.Project;
 import org.drugis.addis2.model.User;
@@ -14,13 +14,13 @@ import org.drugis.addis2.service.TrialverseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -67,12 +67,16 @@ public class ProjectsController {
 		return "projects/edit";
 	}
 	
+	@Transactional
 	@ResponseBody
 	@RequestMapping(value="/{id}", method = RequestMethod.GET, produces = {"application/json"})
 	public Project getProject(Principal principal, ModelMap model, @PathVariable Long id) {
 		Project project = d_projects.findOne(id);
 		for (Intervention intervention : project.interventions) {
 			d_trialverseService.fetchConceptProperties(intervention);
+		}
+		for (Outcome outcome : project.outcomes) {
+			d_trialverseService.fetchConceptProperties(outcome);
 		}
 		d_trialverseService.fetchConceptProperties(project.population);
 		return project;
@@ -88,6 +92,7 @@ public class ProjectsController {
 			existing.shortName = project.shortName;
 			existing.population.conceptUrl = project.population.conceptUrl;
 			existing.interventions = project.interventions;
+			existing.outcomes = project.outcomes;
 			d_projects.save(existing);
 		}
 		return "redirect:/projects/" + id;
