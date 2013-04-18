@@ -20,6 +20,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequestMapping("/data")
 public class TrialverseProxyController {
 	@Autowired private RestTemplate d_rest;
+	@Value("#{settings['trialverse.url']}") private String d_trialVerse;
 	
 	public static List<Map<String, String>> createPaginationLinks(String baseUrl, String repositoryName, int limit, Map<String, Integer> pageInfo) {
 		int currentPage = pageInfo.get("number");
@@ -49,7 +50,6 @@ public class TrialverseProxyController {
 		return requestUrl;
 	}
 
-	private @Value("#{settings['trialverse.url']}") String d_trialVerse;
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/indications")
