@@ -1,0 +1,196 @@
+<mockup version="1.0" skin="sketch" measuredW="1128" measuredH="1031" mockupW="1009" mockupH="1017">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="119" y="14" w="1009" h="638" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>ADDIS%202.0%20--%20new%20meta-analysis%0Ahttp%3A//addis.drugis.org/</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="144" y="96" w="-1" h="-1" measuredW="161" measuredH="28" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>20</size>
+        <text>Analysis%20overview</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="181" y="299" w="-1" h="-1" measuredW="260" measuredH="21" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Indication%20%20%20Severe%20depression%20%28310497006%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="181" y="331" w="330" h="21" measuredW="190" measuredH="21" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Outcome%20%20%20Treatment%20response</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Label" x="188" y="149" w="-1" h="-1" measuredW="50" measuredH="21" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Analysis</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Label" x="169" y="188" w="-1" h="-1" measuredW="69" measuredH="21" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Description</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::TextArea" x="249" y="188" w="259" h="96" measuredW="200" measuredH="140" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Re-analysis%20of%20the%20network%20of%20trials%20measuring%20HAM-D%20treatment%20response.</text>
+      </controlProperties>
+    </control>
+    <control controlID="11" controlTypeID="com.balsamiq.mockups::Image" x="588" y="177" w="434" h="382" measuredW="584" measuredH="513" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>square</borderStyle>
+        <filter>true</filter>
+        <src>./assets/network.png</src>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::CheckBoxGroup" x="252" y="359" w="176" h="232" measuredW="106" measuredH="210" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>%5Bx%5D%20Bupropion%0A%5Bx%5D%20Duloxetine%0A%5Bx%5D%20Escitalopram%0A%5Bx%5D%20Fluoxetine%20%0A%5Bx%5D%20Fluvoxamine%0A%5Bx%5D%20Mirtazapine%0A%5Bx%5D%20Paroxetine%0A%5Bx%5D%20Placebo%0A%5Bx%5D%20Sertraline%0A%5Bx%5D%20Venlafaxine</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Label" x="160" y="359" w="-1" h="-1" measuredW="76" measuredH="21" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Treatments</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Label" x="568" y="146" w="159" h="26" measuredW="157" measuredH="26" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Treatment%20network</text>
+      </controlProperties>
+    </control>
+    <control controlID="28" controlTypeID="__group__" x="179" y="777" w="614" h="254" measuredW="614" measuredH="254" zOrder="11" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::FieldSet" x="0" y="0" w="613" h="254" measuredW="200" measuredH="170" zOrder="0" locked="false" isInGroup="28">
+          <controlProperties>
+            <text>Studies</text>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="__group__" x="15" y="24" w="528" h="65" measuredW="528" measuredH="65" zOrder="1" locked="false" isInGroup="28">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="15" y="1" w="-1" h="-1" measuredW="513" measuredH="21" zOrder="0" locked="false" isInGroup="1">
+              <controlProperties>
+                <text>Alves%20et%20al%2C%201999.%20%22The%20efficacy%20and%20tolerability%20...%22%20Randomized%2C%20Double%20blind%20%20%20%5Bview%20details%5D</text>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="47" y="22" w="-1" h="-1" measuredW="480" measuredH="21" zOrder="1" locked="false" isInGroup="1">
+              <controlProperties>
+                <text>Arm%20%22Venlafaxine%22%3A%20Venlafaxine%2075-150%20mg/day%20%28n%3D40%29%20%5Bview%20details%5D%20%3D%3E%20%22Venlafaxine%22</text>
+              </controlProperties>
+            </control>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="47" y="44" w="-1" h="-1" measuredW="456" measuredH="21" zOrder="2" locked="false" isInGroup="1">
+              <controlProperties>
+                <text>Arm%20%22Fluoxetine%22%3A%20Fluoxetine%2020-40%20mg/day%20%28n%3D47%29%20%5Bview%20details%5D%20%3D%3E%20%22Fluoxetine%22</text>
+              </controlProperties>
+            </control>
+            <control controlID="3" controlTypeID="com.balsamiq.mockups::CheckBox" x="0" y="0" w="18" h="22" measuredW="26" measuredH="22" zOrder="3" locked="false" isInGroup="1">
+              <controlProperties>
+                <state>selected</state>
+                <text/>
+              </controlProperties>
+            </control>
+            <control controlID="4" controlTypeID="com.balsamiq.mockups::CheckBox" x="30" y="21" w="18" h="22" measuredW="26" measuredH="22" zOrder="4" locked="false" isInGroup="1">
+              <controlProperties>
+                <state>selected</state>
+                <text/>
+              </controlProperties>
+            </control>
+            <control controlID="5" controlTypeID="com.balsamiq.mockups::CheckBox" x="30" y="43" w="18" h="22" measuredW="26" measuredH="22" zOrder="5" locked="false" isInGroup="1">
+              <controlProperties>
+                <state>selected</state>
+                <text/>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::VerticalScrollBar" x="598" y="8" w="-1" h="246" measuredW="16" measuredH="100" zOrder="2" locked="false" isInGroup="28"/>
+        <control controlID="3" controlTypeID="__group__" x="15" y="104" w="528" h="65" measuredW="528" measuredH="65" zOrder="3" locked="false" isInGroup="28">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="15" y="1" w="-1" h="-1" measuredW="513" measuredH="21" zOrder="0" locked="false" isInGroup="3">
+              <controlProperties>
+                <text>Alves%20et%20al%2C%201999.%20%22The%20efficacy%20and%20tolerability%20...%22%20Randomized%2C%20Double%20blind%20%20%20%5Bview%20details%5D</text>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="47" y="22" w="-1" h="-1" measuredW="480" measuredH="21" zOrder="1" locked="false" isInGroup="3">
+              <controlProperties>
+                <text>Arm%20%22Venlafaxine%22%3A%20Venlafaxine%2075-150%20mg/day%20%28n%3D40%29%20%5Bview%20details%5D%20%3D%3E%20%22Venlafaxine%22</text>
+              </controlProperties>
+            </control>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="47" y="44" w="-1" h="-1" measuredW="456" measuredH="21" zOrder="2" locked="false" isInGroup="3">
+              <controlProperties>
+                <text>Arm%20%22Fluoxetine%22%3A%20Fluoxetine%2020-40%20mg/day%20%28n%3D47%29%20%5Bview%20details%5D%20%3D%3E%20%22Fluoxetine%22</text>
+              </controlProperties>
+            </control>
+            <control controlID="3" controlTypeID="com.balsamiq.mockups::CheckBox" x="0" y="0" w="18" h="22" measuredW="26" measuredH="22" zOrder="3" locked="false" isInGroup="3">
+              <controlProperties>
+                <state>selected</state>
+                <text/>
+              </controlProperties>
+            </control>
+            <control controlID="4" controlTypeID="com.balsamiq.mockups::CheckBox" x="30" y="21" w="18" h="22" measuredW="26" measuredH="22" zOrder="4" locked="false" isInGroup="3">
+              <controlProperties>
+                <state>selected</state>
+                <text/>
+              </controlProperties>
+            </control>
+            <control controlID="5" controlTypeID="com.balsamiq.mockups::CheckBox" x="30" y="43" w="18" h="22" measuredW="26" measuredH="22" zOrder="5" locked="false" isInGroup="3">
+              <controlProperties>
+                <state>selected</state>
+                <text/>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="4" controlTypeID="__group__" x="15" y="184" w="528" h="65" measuredW="528" measuredH="65" zOrder="4" locked="false" isInGroup="28">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::Label" x="15" y="1" w="-1" h="-1" measuredW="513" measuredH="21" zOrder="0" locked="false" isInGroup="4">
+              <controlProperties>
+                <text>Alves%20et%20al%2C%201999.%20%22The%20efficacy%20and%20tolerability%20...%22%20Randomized%2C%20Double%20blind%20%20%20%5Bview%20details%5D</text>
+              </controlProperties>
+            </control>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="47" y="22" w="-1" h="-1" measuredW="480" measuredH="21" zOrder="1" locked="false" isInGroup="4">
+              <controlProperties>
+                <text>Arm%20%22Venlafaxine%22%3A%20Venlafaxine%2075-150%20mg/day%20%28n%3D40%29%20%5Bview%20details%5D%20%3D%3E%20%22Venlafaxine%22</text>
+              </controlProperties>
+            </control>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::Label" x="47" y="44" w="-1" h="-1" measuredW="456" measuredH="21" zOrder="2" locked="false" isInGroup="4">
+              <controlProperties>
+                <text>Arm%20%22Fluoxetine%22%3A%20Fluoxetine%2020-40%20mg/day%20%28n%3D47%29%20%5Bview%20details%5D%20%3D%3E%20%22Fluoxetine%22</text>
+              </controlProperties>
+            </control>
+            <control controlID="3" controlTypeID="com.balsamiq.mockups::CheckBox" x="0" y="0" w="18" h="22" measuredW="26" measuredH="22" zOrder="3" locked="false" isInGroup="4">
+              <controlProperties>
+                <state>selected</state>
+                <text/>
+              </controlProperties>
+            </control>
+            <control controlID="4" controlTypeID="com.balsamiq.mockups::CheckBox" x="30" y="21" w="18" h="22" measuredW="26" measuredH="22" zOrder="4" locked="false" isInGroup="4">
+              <controlProperties>
+                <state>selected</state>
+                <text/>
+              </controlProperties>
+            </control>
+            <control controlID="5" controlTypeID="com.balsamiq.mockups::CheckBox" x="30" y="43" w="18" h="22" measuredW="26" measuredH="22" zOrder="5" locked="false" isInGroup="4">
+              <controlProperties>
+                <state>selected</state>
+                <text/>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Canvas" x="7" y="240" w="593" h="10" measuredW="100" measuredH="70" zOrder="5" locked="false" isInGroup="28">
+          <controlProperties>
+            <borderStyle>none</borderStyle>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::Label" x="249" y="149" w="-1" h="-1" measuredW="228" measuredH="21" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Treatment%20response%20%28primary%20analysis%29</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

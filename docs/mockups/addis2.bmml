@@ -1,0 +1,82 @@
+<mockup version="1.0" skin="sketch" measuredW="1128" measuredH="1034" mockupW="1009" mockupH="1027">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="119" y="7" w="1009" h="1027" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>ADDIS%202.0%20--%20new%20meta-analysis%0Ahttp%3A//addis.drugis.org/</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="144" y="96" w="-1" h="-1" measuredW="171" measuredH="28" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>20</size>
+        <text>New%20meta-analysis</text>
+      </controlProperties>
+    </control>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::ComboBox" x="249" y="299" w="259" h="-1" measuredW="77" measuredH="127" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>SearchIcon%7Cxsmall</icon>
+        <text>depr%0ADepressive%20disorder%20%2835489007%29%0AChronic%20depression%20%28192080009%29%0AMajor%20depressive%20disorder%20%28370143000%29%0AMild%20depression%20%28310495003%29%0AModerate%20depression%20%28310496002%29%0ASevere%20depression%20%28310497006%29</text>
+      </controlProperties>
+    </control>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="181" y="299" w="-1" h="-1" measuredW="57" measuredH="21" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Indication</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="181" y="443" w="57" h="21" measuredW="57" measuredH="21" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Outcome</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::ComboBox" x="249" y="441" w="259" h="-1" measuredW="48" measuredH="24" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>SearchIcon%7Cxsmall</icon>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="7" controlTypeID="com.balsamiq.mockups::TextInput" x="249" y="146" w="259" h="-1" measuredW="169" measuredH="27" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Hansen%20et%20al.%202005%20HAM-D</text>
+      </controlProperties>
+    </control>
+    <control controlID="8" controlTypeID="com.balsamiq.mockups::Label" x="166" y="149" w="-1" h="-1" measuredW="72" measuredH="21" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Short%20name</text>
+      </controlProperties>
+    </control>
+    <control controlID="9" controlTypeID="com.balsamiq.mockups::Label" x="169" y="188" w="-1" h="-1" measuredW="69" measuredH="21" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Description</text>
+      </controlProperties>
+    </control>
+    <control controlID="10" controlTypeID="com.balsamiq.mockups::TextArea" x="249" y="188" w="259" h="96" measuredW="200" measuredH="140" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Hansen%20et%20al.%20%20%282005%29%20systematic%20review%20of%20anti-depressants%3A%20re-analysis%20of%20the%20network%20of%20trials%20measuring%20HAM-D%20treatment%20response.</text>
+      </controlProperties>
+    </control>
+    <control controlID="12" controlTypeID="com.balsamiq.mockups::Label" x="161" y="479" w="-1" h="-1" measuredW="77" measuredH="21" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Treatments</text>
+      </controlProperties>
+    </control>
+    <control controlID="13" controlTypeID="com.balsamiq.mockups::Label" x="249" y="479" w="-1" h="-1" measuredW="144" measuredH="21" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <state>disabled</state>
+        <text>Choose%20an%20outcome%20first</text>
+      </controlProperties>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::Image" x="568" y="181" w="508" h="447" measuredW="77" measuredH="79" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <borderStyle>square</borderStyle>
+        <filter>true</filter>
+        <text/>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::Label" x="568" y="146" w="159" h="26" measuredW="159" measuredH="26" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <size>18</size>
+        <text>Treatment%20network</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
