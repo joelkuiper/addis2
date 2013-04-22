@@ -32,15 +32,6 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".html" />
 		<beans:property name="templateMode" value="HTML5" />
-		<beans:property name="cacheTTLMs" value="0" />
 	</beans:bean>
-	
-	<!-- CSRF protection -->
-	<!-- Data Value Processor -->
-	<beans:bean name="requestDataValueProcessor" class="org.drugis.addis2.controller.csrf.CSRFRequestDataValueProcessor"/>
-	
-	<interceptors>
-		<beans:bean class="org.drugis.addis2.controller.csrf.CSRFHandlerInterceptor" />
-	</interceptors>
 	
 </beans:beans>
