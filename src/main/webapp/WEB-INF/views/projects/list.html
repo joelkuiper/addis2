@@ -4,6 +4,8 @@
 
 <body>
 <div class="container-fluid">
+	<div th:substituteby="main::navigation"></div>
+
 	<h1 th:text="${pageTitle}"></h1>
 	
 	<ul th:each="project : ${projects}">

@@ -5,6 +5,8 @@
 <body>
 
 <div class="container-fluid">
+	<div th:substituteby="main::navigation"></div>
+	
 	<h1>Login</h1>
 	<div id="login-error" th:text="${error}"></div>
 	

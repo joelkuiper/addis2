@@ -4,6 +4,8 @@
 
 <body ng-controller="PopulationsController">
 <div class="container-fluid">
+	<div th:substituteby="main::navigation"></div>
+
 	<h1 th:text="${pageTitle}"></h1>
 	<div  ng-repeat="alert in alerts" ng-cloak="">
 	  	<div class="{{alert.type}} alert">{{alert.msg}}<a href="#" class="close" data-dismiss="alert">&times;</a></div>
@@ -20,15 +22,15 @@
 		<label>Population</label>
 		<input type="text" ui-select2="populationSelect" ng-model="_population" class="input-large" />
 		
-		<br />
+		<br /><br />
 		<label>Interventions (and Control)</label> 
 		<input id="interventions" ui-select2="interventionsSelect" multiple="multiple" ng-model="_interventions" class="input-large" />
 		
-		<br />
+		<br /><br />
 		<label>Outcomes</label> 
 		<input id="outcomes" ui-select2="outcomesSelect" multiple="multiple" ng-model="_outcomes" class="input-large" />
 		
-		<br />
+		<br /><br />
 		<button type="button" class="btn" ng-click="save()">Save</button>
 	</form>
 
