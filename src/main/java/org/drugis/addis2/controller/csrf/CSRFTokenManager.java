@@ -18,7 +18,7 @@ final class CSRFTokenManager {
 	/**
 	 * The token parameter name
 	 */
-	static final String CSRF_PARAM_NAME = "CSRFToken";
+	static final String CSRF_PARAM_NAME = "X-CSRFToken";
 
 	/**
 	 * The location on the session which stores the token
@@ -26,10 +26,7 @@ final class CSRFTokenManager {
 	private final static String CSRF_TOKEN_FOR_SESSION_ATTR_NAME = CSRFTokenManager.class.getName() + ".tokenval";
 
 	static String getTokenForSession(HttpSession session) {
-		String token = null;
-		// I cannot allow more than one token on a session - in the case of two
-		// requests trying to
-		// init the token concurrently
+		String token = null;		
 		synchronized (session) {
 			token = (String) session.getAttribute(CSRF_TOKEN_FOR_SESSION_ATTR_NAME);
 			if (null == token) {
@@ -47,7 +44,11 @@ final class CSRFTokenManager {
 	 * @return
 	 */
 	static String getTokenFromRequest(HttpServletRequest request) {
-		return request.getParameter(CSRF_PARAM_NAME);
+		String token = request.getParameter(CSRF_PARAM_NAME);
+		if (token == null) { // Check the HEADER
+			token = request.getHeader(CSRF_PARAM_NAME);
+		}
+		return token;
 	}
 
 	private CSRFTokenManager() {
