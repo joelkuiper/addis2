@@ -1,0 +1,288 @@
+<mockup version="1.0" skin="sketch" measuredW="2199" measuredH="2500" mockupW="2087" mockupH="2500">
+  <controls>
+    <control controlID="78" controlTypeID="__group__" x="112" y="0" w="1009" h="798" measuredW="1009" measuredH="798" zOrder="4" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="0" y="0" w="1009" h="798" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="78">
+          <controlProperties>
+            <text>ADDIS%202.0%20--%20my%20projects%0Ahttp%3A//addis.drugis.org/</text>
+            <verticalScrollbar>true</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Image" x="2" y="65" w="998" h="706" measuredW="630" measuredH="420" zOrder="1" locked="false" isInGroup="78">
+          <controlProperties>
+            <src>./medicine_capsules_skorea_ap.jpg</src>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::FieldSet" x="316" y="313" w="310" h="210" measuredW="200" measuredH="170" zOrder="2" locked="false" isInGroup="78">
+          <controlProperties>
+            <text>Log%20in%20</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::Paragraph" x="337" y="343" w="274" h="80" measuredW="200" measuredH="80" zOrder="3" locked="false" isInGroup="78">
+          <controlProperties>
+            <text>This%20is%20a%20public%20beta%20for%20Aggregate%20Data%20Drug%20Information%20System%202.0.%20Use%20your%20%5BOpen%20Researcher%20and%20Contributor%20ID%5D%20to%20log%20in.</text>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::Button" x="406" y="438" w="131" h="40" measuredW="134" measuredH="27" zOrder="4" locked="false" isInGroup="78">
+          <controlProperties>
+            <text>Log%20in%20using%20ORCID</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Link" x="548" y="488" w="-1" h="-1" measuredW="63" measuredH="21" zOrder="5" locked="false" isInGroup="78">
+          <controlProperties>
+            <text>contact%20us</text>
+          </controlProperties>
+        </control>
+        <control controlID="6" controlTypeID="com.balsamiq.mockups::Image" x="781" y="88" w="187" h="124" measuredW="95" measuredH="63" zOrder="6" locked="false" isInGroup="78">
+          <controlProperties>
+            <src>./beta_label.png</src>
+          </controlProperties>
+        </control>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::Title" x="0" y="103" w="984" h="-1" measuredW="773" measuredH="41" zOrder="7" locked="false" isInGroup="78">
+          <controlProperties>
+            <size>32</size>
+            <text>ADDIS%202.0%20-%20Aggregate%20Data%20Drug%20Information%20System</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="79" controlTypeID="__group__" x="1190" y="0" w="1009" h="798" measuredW="1009" measuredH="798" zOrder="3" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="0" y="0" w="1009" h="798" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="79">
+          <controlProperties>
+            <text>ADDIS%202.0%20--%20my%20projects%0Ahttp%3A//addis.drugis.org/</text>
+            <verticalScrollbar>true</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::Title" x="10" y="103" w="-1" h="-1" measuredW="212" measuredH="50" zOrder="1" locked="false" isInGroup="79">
+          <controlProperties>
+            <text>My%20Projects</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::BreadCrumbs" x="15" y="79" w="-1" h="-1" measuredW="130" measuredH="24" zOrder="2" locked="false" isInGroup="79">
+          <controlProperties>
+            <text>ADDIS%2C%20My%20projects</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::HRule" x="24" y="518" w="928" h="-1" measuredW="100" measuredH="5" zOrder="3" locked="false" isInGroup="79"/>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::Button" x="41" y="538" w="-1" h="-1" measuredW="93" measuredH="27" zOrder="4" locked="false" isInGroup="79">
+          <controlProperties>
+            <text>New%20project</text>
+          </controlProperties>
+        </control>
+        <control controlID="5" controlTypeID="__group__" x="24" y="168" w="932" h="145" measuredW="932" measuredH="145" zOrder="5" locked="false" isInGroup="79">
+          <groupChildrenDescriptors>
+            <control controlID="8" controlTypeID="__group__" x="0" y="0" w="932" h="145" measuredW="932" measuredH="145" zOrder="0" locked="false" isInGroup="5">
+              <groupChildrenDescriptors>
+                <control controlID="0" controlTypeID="com.balsamiq.mockups::HRule" x="121" y="8" w="804" h="-1" measuredW="100" measuredH="5" zOrder="0" locked="false" isInGroup="8"/>
+                <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="-1" h="-1" measuredW="115" measuredH="21" zOrder="1" locked="false" isInGroup="8">
+                  <controlProperties>
+                    <text>Hansen%20et%20al.%202005</text>
+                  </controlProperties>
+                </control>
+                <control controlID="2" controlTypeID="com.balsamiq.mockups::Paragraph" x="17" y="28" w="880" h="35" measuredW="200" measuredH="80" zOrder="2" locked="false" isInGroup="8">
+                  <controlProperties>
+                    <text>Hansen%20et%20al.%20%282005%29%20systematic%20review%20of%20anti-depressants%3A%20re-analysis%20of%20the%20network%20of%20trials.</text>
+                  </controlProperties>
+                </control>
+                <control controlID="3" controlTypeID="com.balsamiq.mockups::IconLabel" x="746" y="28" w="179" h="-1" measuredW="294" measuredH="48" zOrder="3" locked="false" isInGroup="8">
+                  <controlProperties>
+                    <icon>TableIcon%7Clarge</icon>
+                    <labelPosition>right</labelPosition>
+                    <text>Systematic%20review%20of%20intervention%20effects</text>
+                  </controlProperties>
+                </control>
+                <control controlID="4" controlTypeID="com.balsamiq.mockups::Paragraph" x="17" y="124" w="439" h="21" measuredW="200" measuredH="80" zOrder="4" locked="false" isInGroup="8">
+                  <controlProperties>
+                    <text>Severe%20depression%3B%2046%20studies%3B%2010%20interventions%3B%206%20outcomes</text>
+                  </controlProperties>
+                </control>
+                <control controlID="5" controlTypeID="com.balsamiq.mockups::CheckBoxGroup" x="27" y="53" w="-1" h="-1" measuredW="189" measuredH="63" zOrder="5" locked="false" isInGroup="8">
+                  <controlProperties>
+                    <text>-%5Bx%5D%20context%20finalized-%0A-%5Bx%5D%20study%20selection%20finalized-%0A-%5B%20%5D%20evidence%20synthesis%20finalized-</text>
+                  </controlProperties>
+                </control>
+                <control controlID="6" controlTypeID="com.balsamiq.mockups::Button" x="816" y="118" w="-1" h="-1" measuredW="116" measuredH="27" zOrder="6" locked="false" isInGroup="8">
+                  <controlProperties>
+                    <text>Remove%20project</text>
+                  </controlProperties>
+                </control>
+              </groupChildrenDescriptors>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="6" controlTypeID="__group__" x="24" y="328" w="937" h="166" measuredW="937" measuredH="166" zOrder="6" locked="false" isInGroup="79">
+          <groupChildrenDescriptors>
+            <control controlID="0" controlTypeID="com.balsamiq.mockups::HRule" x="86" y="8" w="839" h="-1" measuredW="100" measuredH="5" zOrder="0" locked="false" isInGroup="6"/>
+            <control controlID="1" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="-1" h="-1" measuredW="86" measuredH="21" zOrder="1" locked="false" isInGroup="6">
+              <controlProperties>
+                <text>Edarbi%20dossier</text>
+              </controlProperties>
+            </control>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::Paragraph" x="17" y="28" w="880" h="35" measuredW="200" measuredH="80" zOrder="2" locked="false" isInGroup="6">
+              <controlProperties>
+                <text>The%20benefits%20and%20risks%20of%20Edarbi%20based%20on%20the%20primary%20studies%20reported%20in%20the%20EMA%20EPAR.</text>
+              </controlProperties>
+            </control>
+            <control controlID="3" controlTypeID="com.balsamiq.mockups::IconLabel" x="746" y="28" w="191" h="-1" measuredW="256" measuredH="48" zOrder="3" locked="false" isInGroup="6">
+              <controlProperties>
+                <icon>ShareIcon%7Clarge</icon>
+                <labelPosition>right</labelPosition>
+                <text>Structured%20benefit-risk%20assessment</text>
+              </controlProperties>
+            </control>
+            <control controlID="4" controlTypeID="com.balsamiq.mockups::Paragraph" x="14" y="142" w="439" h="21" measuredW="200" measuredH="80" zOrder="4" locked="false" isInGroup="6">
+              <controlProperties>
+                <text>Essential%20hypertension%3B%205%20studies%3B%204%20interventions%3B%203%20outcomes</text>
+              </controlProperties>
+            </control>
+            <control controlID="5" controlTypeID="com.balsamiq.mockups::CheckBoxGroup" x="27" y="53" w="-1" h="-1" measuredW="189" measuredH="84" zOrder="5" locked="false" isInGroup="6">
+              <controlProperties>
+                <text>-%5Bx%5D%20context%20finalized-%0A-%5Bx%5D%20study%20selection%20finalized-%0A-%5B%20%5D%20evidence%20synthesis%20finalized-%0A-%5B%20%5D%20benefit-risk%20balance%20finalized-</text>
+              </controlProperties>
+            </control>
+            <control controlID="6" controlTypeID="com.balsamiq.mockups::Button" x="806" y="139" w="-1" h="-1" measuredW="116" measuredH="27" zOrder="6" locked="false" isInGroup="6">
+              <controlProperties>
+                <text>Remove%20project</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="81" controlTypeID="__group__" x="112" y="839" w="1009" h="798" measuredW="1009" measuredH="798" zOrder="0" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="0" y="0" w="1009" h="798" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="81">
+          <controlProperties>
+            <text>ADDIS%202.0%20--%20%22Hansen%20et%20al.%202005%22%20project%0Ahttp%3A//addis.drugis.org/</text>
+            <verticalScrollbar>true</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::TabBar" x="10" y="158" w="967" h="587" measuredW="257" measuredH="100" zOrder="1" locked="false" isInGroup="81">
+          <controlProperties>
+            <selectedIndex>0</selectedIndex>
+            <text>Overview%2C%20Studies%2C%20Analyses</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Title" x="10" y="103" w="-1" h="-1" measuredW="523" measuredH="50" zOrder="2" locked="false" isInGroup="81">
+          <controlProperties>
+            <text>Project%3A%20%22Hansen%20et%20al.%202005%22</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::BreadCrumbs" x="15" y="79" w="-1" h="-1" measuredW="260" measuredH="24" zOrder="3" locked="false" isInGroup="81">
+          <controlProperties>
+            <text>ADDIS%2C%20My%20projects%2C%20Hansen%20et%20al.%202005</text>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::Image" x="24" y="200" w="913" h="464" measuredW="77" measuredH="79" zOrder="4" locked="false" isInGroup="81"/>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="82" controlTypeID="__group__" x="112" y="1702" w="1009" h="798" measuredW="1009" measuredH="798" zOrder="1" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="0" y="0" w="1009" h="798" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="82">
+          <controlProperties>
+            <text>ADDIS%202.0%20--%20%22Hansen%20et%20al.%202005%22%20project%0Ahttp%3A//addis.drugis.org/</text>
+            <verticalScrollbar>true</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::TabBar" x="15" y="165" w="962" h="580" measuredW="258" measuredH="100" zOrder="1" locked="false" isInGroup="82">
+          <controlProperties>
+            <selectedIndex>0</selectedIndex>
+            <text>Overview%2C%20Data%20set%2C%20Results</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Title" x="15" y="110" w="909" h="-1" measuredW="847" measuredH="50" zOrder="2" locked="false" isInGroup="82">
+          <controlProperties>
+            <align>left</align>
+            <text>Analysis%3A%20Treatment%20response%20%28primary%20analysis%29</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::BreadCrumbs" x="15" y="79" w="-1" h="-1" measuredW="503" measuredH="24" zOrder="3" locked="false" isInGroup="82">
+          <controlProperties>
+            <text>ADDIS%2C%20My%20projects%2C%20Hansen%20et%20al.%202005%2C%20Treatment%20response%20%28primary%20analysis%29</text>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::Image" x="24" y="200" w="913" h="464" measuredW="77" measuredH="79" zOrder="4" locked="false" isInGroup="82"/>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="83" controlTypeID="__group__" x="1190" y="839" w="1009" h="798" measuredW="1009" measuredH="798" zOrder="2" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="0" controlTypeID="com.balsamiq.mockups::BrowserWindow" x="0" y="0" w="1009" h="798" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="83">
+          <controlProperties>
+            <text>ADDIS%202.0%20--%20%22Hansen%20et%20al.%202005%22%20project%0Ahttp%3A//addis.drugis.org/</text>
+            <verticalScrollbar>true</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="1" controlTypeID="com.balsamiq.mockups::TabBar" x="11" y="160" w="966" h="585" measuredW="257" measuredH="100" zOrder="1" locked="false" isInGroup="83">
+          <controlProperties>
+            <selectedIndex>2</selectedIndex>
+            <text>Overview%2C%20Studies%2C%20Analyses</text>
+          </controlProperties>
+        </control>
+        <control controlID="2" controlTypeID="com.balsamiq.mockups::Title" x="16" y="103" w="-1" h="-1" measuredW="523" measuredH="50" zOrder="2" locked="false" isInGroup="83">
+          <controlProperties>
+            <text>Project%3A%20%22Hansen%20et%20al.%202005%22</text>
+          </controlProperties>
+        </control>
+        <control controlID="3" controlTypeID="com.balsamiq.mockups::BreadCrumbs" x="15" y="79" w="-1" h="-1" measuredW="260" measuredH="24" zOrder="3" locked="false" isInGroup="83">
+          <controlProperties>
+            <text>ADDIS%2C%20My%20projects%2C%20Hansen%20et%20al.%202005</text>
+          </controlProperties>
+        </control>
+        <control controlID="4" controlTypeID="com.balsamiq.mockups::HRule" x="226" y="214" w="730" h="-1" measuredW="100" measuredH="5" zOrder="4" locked="false" isInGroup="83"/>
+        <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="31" y="206" w="-1" h="-1" measuredW="195" measuredH="21" zOrder="5" locked="false" isInGroup="83">
+          <controlProperties>
+            <text>Outcome%201%3A%20Treatment%20response</text>
+          </controlProperties>
+        </control>
+        <control controlID="6" controlTypeID="com.balsamiq.mockups::Paragraph" x="35" y="232" w="742" h="19" measuredW="200" measuredH="80" zOrder="6" locked="false" isInGroup="83">
+          <controlProperties>
+            <text>Treatment%20response%20is%20the%20main%20efficacy%20criterion.%20It%20is%20defined%20as%20a%2050%25%20or%20greater%20improvement%20on%20the%20HAM-D%20scale.</text>
+          </controlProperties>
+        </control>
+        <control controlID="7" controlTypeID="com.balsamiq.mockups::List" x="51" y="260" w="412" h="51" measuredW="100" measuredH="126" zOrder="7" locked="false" isInGroup="83">
+          <controlProperties>
+            <borderStyle>none</borderStyle>
+            <text>%5BPrimary%20analysis%5D%0A%5BSensitivity%3A%20trial%20duration%5D</text>
+            <value>0</value>
+            <verticalScrollbar>false</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="8" controlTypeID="com.balsamiq.mockups::Button" x="41" y="311" w="-1" h="-1" measuredW="94" measuredH="27" zOrder="8" locked="false" isInGroup="83">
+          <controlProperties>
+            <text>Add%20analysis</text>
+          </controlProperties>
+        </control>
+        <control controlID="9" controlTypeID="com.balsamiq.mockups::HRule" x="159" y="378" w="797" h="-1" measuredW="100" measuredH="5" zOrder="9" locked="false" isInGroup="83"/>
+        <control controlID="10" controlTypeID="com.balsamiq.mockups::Label" x="31" y="370" w="-1" h="-1" measuredW="130" measuredH="21" zOrder="10" locked="false" isInGroup="83">
+          <controlProperties>
+            <text>Outcome%202%3A%20Dizziness</text>
+          </controlProperties>
+        </control>
+        <control controlID="11" controlTypeID="com.balsamiq.mockups::Paragraph" x="35" y="396" w="742" h="19" measuredW="200" measuredH="80" zOrder="11" locked="false" isInGroup="83">
+          <controlProperties>
+            <text>Dizziness%20is%20an%20important%20and%20common%20side%20effect%20of%20anti-depressants.%20In%20the%20elderly%20it%20may%20also%20predict%20falling%2C%20fractures.</text>
+          </controlProperties>
+        </control>
+        <control controlID="12" controlTypeID="com.balsamiq.mockups::List" x="51" y="424" w="412" h="27" measuredW="100" measuredH="126" zOrder="12" locked="false" isInGroup="83">
+          <controlProperties>
+            <borderStyle>none</borderStyle>
+            <text>%5BPrimary%20analysis%5D</text>
+            <value>0</value>
+            <verticalScrollbar>false</verticalScrollbar>
+          </controlProperties>
+        </control>
+        <control controlID="13" controlTypeID="com.balsamiq.mockups::Button" x="41" y="455" w="-1" h="-1" measuredW="94" measuredH="27" zOrder="13" locked="false" isInGroup="83">
+          <controlProperties>
+            <text>Add%20analysis</text>
+          </controlProperties>
+        </control>
+        <control controlID="14" controlTypeID="com.balsamiq.mockups::StickyNote" x="93" y="470" w="180" h="167" measuredW="109" measuredH="123" zOrder="14" locked="false" isInGroup="83">
+          <controlProperties>
+            <text>Adds%20a%20new%20analysis%20to%20the%20above%20list%2C%20with%20an%20inline%20editor%20for%20the%20analysis%20title.%20To%20change%20properties%20of%20the%20analysis%2C%20the%20user%20must%20click%20the%20link%20for%20the%20new%20analysis.</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+  </controls>
+</mockup>
