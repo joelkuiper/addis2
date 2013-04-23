@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,7 +51,6 @@ public class TrialverseProxyController {
 		return requestUrl;
 	}
 
-
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/indications")
 	public @ResponseBody Object getIndications(
@@ -68,19 +68,13 @@ public class TrialverseProxyController {
 		return object;
 	}
 	
-	@RequestMapping("/treatments")
-	public @ResponseBody Object getTreatments(
+	@RequestMapping("/{type}")
+	public @ResponseBody Object getFoConcept(
+			@PathVariable String type,
 			@RequestParam String indication) {
 		return d_rest.getForObject(
-				"{concept}/treatments",
-				Object.class, indication);
+				"{concept}/{type}",
+				Object.class, indication, type);
 	}
 	
-	@RequestMapping("/variables")
-	public @ResponseBody Object getVariables(
-			@RequestParam String indication) {
-		return d_rest.getForObject(
-				"{concept}/variables",
-				Object.class, indication);
-	}
 }
