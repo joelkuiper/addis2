@@ -35,17 +35,15 @@ app.controller('ProjectsController', function($scope, $http) {
 			function(data) { return getContentForConcept(data.content); }
 		);
 	
-	$scope.interventionsSelect = 
-		createSelectOptions(
-			function() { return config.dataUrl + "/treatments?indication=" + $scope._population.id; },
-			function(data) { return getContentForConcept(data); }
-		);
-	$scope.outcomesSelect = 
-		createSelectOptions(
-			function() { return config.dataUrl + "/variables?indication=" + $scope._population.id; },
-			function(data) { return getContentForConcept(data); }
-		);
+	function createMultipleSelect(type) { 
+		return createSelectOptions(
+			function() { return config.dataUrl + "/" + type +  "?indication=" + $scope._population.id; },
+			function(data) { return getContentForConcept(data); });
+	};
 	
+	$scope.interventionsSelect = createMultipleSelect("treatments");
+	$scope.outcomesSelect = createMultipleSelect("variables");
+		
 	var setProject = function(data) {
 		$scope.project = data;
 		

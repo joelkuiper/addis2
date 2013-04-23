@@ -41,20 +41,63 @@ public class ProjectsController {
 		return true;
 	}
 	
-	@RequestMapping(value="", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public String list(Model model, Principal principal) {
 		User user = getActiveUser(principal);
 		model.addAttribute("projects", d_projects.findByOwner(user));
 		return "projects/list";
 	}
 	
-	@RequestMapping(value="", method = RequestMethod.POST)
-	public String createAction(Principal principal) {
+	@RequestMapping(method = RequestMethod.POST)
+	public String create(Principal principal) {
 		Project project = new Project();
 		project.owner = getActiveUser(principal);
 		project.population = new Population();
 		project = d_projects.save(project);
 		return "redirect:/projects/" + project.id + "/edit";
+	}
+	
+	
+	@Transactional
+	@ResponseBody
+	@RequestMapping(value="/{id}", method = RequestMethod.GET, produces = {"application/json"})
+	public Project get(Principal principal, ModelMap model, @PathVariable Long id) {
+		Project project = d_projects.findOne(id);
+		for (Intervention intervention : project.interventions) {
+			d_trialverseService.fetchConceptProperties(intervention);
+		}
+		for (Outcome outcome : project.outcomes) {
+			d_trialverseService.fetchConceptProperties(outcome);
+		}
+		d_trialverseService.fetchConceptProperties(project.population);
+		return project;
+	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.POST, consumes = {"application/json"})
+	public String edit(Principal principal,
+			@PathVariable Long id, 
+			@RequestBody Project project) {
+		Project existing = d_projects.findOne(id);
+		if(userIsAuthorized(existing.owner, principal)) { 
+			existing.description = project.description;
+			existing.shortName = project.shortName;
+			existing.population.conceptUrl = project.population.conceptUrl;
+			existing.interventions = project.interventions;
+			existing.outcomes = project.outcomes;
+			d_projects.save(existing);
+		}
+		return "redirect:/projects/" + id;
+	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.DELETE, consumes = {"application/json"})
+	@ResponseBody
+	public String delete(Principal principal,
+			@PathVariable Long id) {
+		Project existing = d_projects.findOne(id);
+		if(userIsAuthorized(existing.owner, principal)) { 
+			d_projects.delete(existing);
+		}
+		return "redirect:/projects/";
 	}
 	
 	@RequestMapping(value="/{id}/edit", method = RequestMethod.GET)
@@ -74,35 +117,5 @@ public class ProjectsController {
 		}
 		return "projects/studies";
 	}
-	
-	@Transactional
-	@ResponseBody
-	@RequestMapping(value="/{id}", method = RequestMethod.GET, produces = {"application/json"})
-	public Project getProject(Principal principal, ModelMap model, @PathVariable Long id) {
-		Project project = d_projects.findOne(id);
-		for (Intervention intervention : project.interventions) {
-			d_trialverseService.fetchConceptProperties(intervention);
-		}
-		for (Outcome outcome : project.outcomes) {
-			d_trialverseService.fetchConceptProperties(outcome);
-		}
-		d_trialverseService.fetchConceptProperties(project.population);
-		return project;
-	}
-	
-	@RequestMapping(value="/{id}", method = RequestMethod.POST, consumes = {"application/json"})
-	public String editAction(Principal principal,
-			@PathVariable Long id, 
-			@RequestBody Project project) {
-		Project existing = d_projects.findOne(id);
-		if(userIsAuthorized(existing.owner, principal)) { 
-			existing.description = project.description;
-			existing.shortName = project.shortName;
-			existing.population.conceptUrl = project.population.conceptUrl;
-			existing.interventions = project.interventions;
-			existing.outcomes = project.outcomes;
-			d_projects.save(existing);
-		}
-		return "redirect:/projects/" + id;
-	}
+
 }
