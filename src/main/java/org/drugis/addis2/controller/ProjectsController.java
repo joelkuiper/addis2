@@ -28,8 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ProjectsController {
 	@Autowired private ProjectRepository d_projects;
 	@Autowired private UserRepository d_users;
-	
-	@Autowired TrialverseService d_trialverseService;
+	@Autowired private TrialverseService d_trialverseService;
 
 	private User getActiveUser(Principal principal) { 
 		return d_users.findByOpenid(principal.getName());
@@ -65,6 +64,15 @@ public class ProjectsController {
 			model.addAttribute("project", project);
 		}
 		return "projects/edit";
+	}
+	
+	@RequestMapping(value="/{id}/studies", method = RequestMethod.GET)
+	public String studiesForm(Principal principal, ModelMap model, @PathVariable Long id) {
+		Project project = d_projects.findOne(id);
+		if(userIsAuthorized(project.owner, principal)) { 
+			model.addAttribute("project", project);
+		}
+		return "projects/studies";
 	}
 	
 	@Transactional

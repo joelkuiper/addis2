@@ -28,8 +28,8 @@
 					<b class="caret"></b>
 				</a>
 				<ul class="dropdown-menu">
-					<li><a sec:authorize="!hasRole('ROLE_USER')" th:href="@{/auth/login}">Login</a></li>
-					<li><a th:href="@{/auth/logout}">Logout</a></li>
+					<li><a sec:authorize="!isAuthenticated()" th:href="@{/auth/login}">Login</a></li>
+					<li><a sec:authorize="isAuthenticated()" th:href="@{/auth/logout}">Logout</a></li>
 				</ul>
 			</li>
 		</ul>

@@ -1,4 +1,4 @@
-app.controller('PopulationsController', function($scope, $http) {
+app.controller('ProjectsController', function($scope, $http) {
 	$scope.project = {};
 
 	function getContentForConcept(concept) { 
