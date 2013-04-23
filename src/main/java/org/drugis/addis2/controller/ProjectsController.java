@@ -61,16 +61,16 @@ public class ProjectsController {
 	public String editForm(Principal principal, ModelMap model, @PathVariable Long id) {
 		Project project = d_projects.findOne(id);
 		if(userIsAuthorized(project.owner, principal)) { 
-			model.addAttribute("project", project);
+			model.addAttribute("projectName", project.shortName);
 		}
 		return "projects/edit";
 	}
 	
-	@RequestMapping(value="/{id}/studies", method = RequestMethod.GET)
+	@RequestMapping(value="/{id}/studies", method = RequestMethod.GET, produces =  {"text/html"})
 	public String studiesForm(Principal principal, ModelMap model, @PathVariable Long id) {
 		Project project = d_projects.findOne(id);
 		if(userIsAuthorized(project.owner, principal)) { 
-			model.addAttribute("project", project);
+			model.addAttribute("projectName", project.shortName);
 		}
 		return "projects/studies";
 	}
