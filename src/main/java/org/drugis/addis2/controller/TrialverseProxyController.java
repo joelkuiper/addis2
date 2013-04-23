@@ -102,7 +102,7 @@ public class TrialverseProxyController {
 	public @ResponseBody Object getForConcept(
 			final @PathVariable  String type,
 			final @RequestParam("indication") URI indicationURI,
-			final @RequestParam("q") String name) {
+			final @RequestParam(value="q", required=false) String name) {
 		return d_rest.getForObject(
 				"{concept}/{type}?name={name}",
 				Object.class, indicationURI, type, name);
