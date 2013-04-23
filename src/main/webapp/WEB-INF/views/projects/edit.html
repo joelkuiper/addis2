@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html ng-app="addis" xmlns:th="http://www.thymeleaf.org" th:with="pageTitle=${'Project: ' + projectName}">
+<html ng-app="addis" xmlns:th="http://www.thymeleaf.org" 
+	th:with="pageTitle='Project: ' + (${projectName}?: 'untitled')">
 <head th:include="main::head"></head>
 
 <body ng-controller="ProjectsController">
