@@ -1,6 +1,5 @@
 package org.drugis.addis2.view.helper;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 

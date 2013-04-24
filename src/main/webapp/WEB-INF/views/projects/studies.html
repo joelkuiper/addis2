@@ -18,7 +18,13 @@
   	<div ng-repeat="study in studies">
 	  	<dl class="dl-horizontal">
 		    <dt>{{study.name}}</dt>
-		    <dd>{{study.title}}</dd>
+		    <dd>{{study.title}}
+		    	<ul>
+		    		<li ng-repeat="arm in study.arms" ng-show="!$first">
+		    			{{arm.name}} (n={{arm.armSize}})
+		    		</li>
+		    	</ul>
+		    </dd>
 	    </dl>
   	</div>
 	<footer th:include="main::footer"></footer>
