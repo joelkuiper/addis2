@@ -26,20 +26,24 @@ import com.google.common.base.Joiner;
 public class TrialverseProxyController {
 	@Autowired private RestTemplate d_rest;
 	@Value("#{settings['trialverse.url']}") private String d_trialverse;
-	
-	public static List<Map<String, String>> createPaginationLinks(String baseUrl, String repositoryName, int limit, Map<String, Integer> pageInfo) {
-		int currentPage = pageInfo.get("number");
-		int totalPages = pageInfo.get("totalPages");
-		List<Map<String, String>> links = new ArrayList<>();
-		
+
+	public static List<Map<String, String>> createPaginationLinks(
+			final String baseUrl,
+			final String repositoryName,
+			final int limit,
+			final Map<String, Integer> pageInfo) {
+		final int currentPage = pageInfo.get("number");
+		final int totalPages = pageInfo.get("totalPages");
+		final List<Map<String, String>> links = new ArrayList<>();
+
 		if (currentPage > 1) {
-			Map<String, String> map = new HashMap<>();
+			final Map<String, String> map = new HashMap<>();
 			map.put("rel", repositoryName + ".prev");
 			map.put("href", getRequestUrl(baseUrl, currentPage - 1, limit));
 			links.add(map);
 		}
 		if (currentPage < totalPages) {
-			Map<String, String> map = new HashMap<>();
+			final Map<String, String> map = new HashMap<>();
 			map.put("rel", repositoryName + ".next");
 			map.put("href", getRequestUrl(baseUrl, currentPage + 1, limit));
 			links.add(map);
@@ -47,23 +51,24 @@ public class TrialverseProxyController {
 		return links;
 	}
 
-	private static String getRequestUrl(String baseUrl, int pageNumber, int limit) {
-		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseUrl);
+	private static String getRequestUrl(final String baseUrl, final int pageNumber, final int limit) {
+		final UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseUrl);
 		builder.queryParam("page", pageNumber);
 		builder.queryParam("limit", limit);
-		String requestUrl = builder.build().toUriString();
+		final String requestUrl = builder.build().toUriString();
 		return requestUrl;
 	}
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping("/indications")
 	public @ResponseBody Object getIndications(
-			@RequestParam(defaultValue="1") Integer page,
-			@RequestParam(defaultValue="20") Integer limit,
-			@RequestParam(defaultValue="") String q,
-			HttpServletRequest request) {
+			@RequestParam(defaultValue="1") final Integer page,
+			@RequestParam(defaultValue="20") final Integer limit,
+			@RequestParam(defaultValue="") final String q,
+			final HttpServletRequest request) {
 		final String baseUrl = request.getRequestURL().toString();
 		@SuppressWarnings("rawtypes")
+		final
 		Map response = d_rest.getForObject(
 				"{trialVerse}/concepts/search/typeAndName?type=INDICATION&page={page}&limit={limit}&q={q}",
 				Map.class, d_trialverse, page, limit, q);
@@ -71,31 +76,31 @@ public class TrialverseProxyController {
 				(Map<String, Integer>) response.get("page")));
 		return response;
 	}
-	
+
 	@RequestMapping("/studies")
 	public @ResponseBody Object getStudies(
 			@RequestParam("population") final URI populationURI,
 			@RequestParam("interventions") final List<URI> interventionURIs,
 			@RequestParam("outcomes")  final List<URI> outcomeURIs) {
-		List<UUID> interventions = new ArrayList<>();
-		for(URI intervention : interventionURIs) { 
+		final List<UUID> interventions = new ArrayList<>();
+		for(final URI intervention : interventionURIs) {
 			interventions.add(getUUIDFromURI(intervention));
 		}
-		List<UUID> outcomes = new ArrayList<>();
-		for(URI outcome : outcomeURIs) { 
+		final List<UUID> outcomes = new ArrayList<>();
+		for(final URI outcome : outcomeURIs) {
 			outcomes.add(getUUIDFromURI(outcome));
 		}
-		Joiner csv = Joiner.on(",");
+		final Joiner csv = Joiner.on(",");
 		return d_rest.getForObject(
 			"{trialverse}/studies/findByConcepts?indication={indication}&variables={outcomes}&treatments={interventions}",
 			Object.class, d_trialverse, getUUIDFromURI(populationURI), csv.join(outcomes), csv.join(interventions));
 	}
-	
-	private UUID getUUIDFromURI(URI conceptURI) { 
-		String[] segments = conceptURI.getPath().split("/");
+
+	private UUID getUUIDFromURI(final URI conceptURI) {
+		final String[] segments = conceptURI.getPath().split("/");
 		return UUID.fromString(segments[segments.length-1]);
 	}
-	
+
 	@RequestMapping("/{type}")
 	public @ResponseBody Object getForConcept(
 			final @PathVariable  String type,
@@ -105,7 +110,7 @@ public class TrialverseProxyController {
 				"{concept}/{type}?name={name}",
 				Object.class, indicationURI, type, name);
 	}
-	
-	
-		
+
+
+
 }

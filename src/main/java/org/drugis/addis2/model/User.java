@@ -9,14 +9,14 @@ import javax.persistence.Id;
 import lombok.Data;
 
 @Entity
-public @Data class User {
+@Data public class User {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) public Long id;
 	@Column(unique=true, nullable=false) public String openid;
-	
+
 	public User() {
 	}
-	
-	public User(String openid) {
+
+	public User(final String openid) {
 		this.openid = openid;
 	}
 }

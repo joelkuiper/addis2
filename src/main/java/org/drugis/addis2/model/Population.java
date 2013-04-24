@@ -10,12 +10,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 import lombok.Data;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
-public @Data class Population implements Concept {
+@Data public class Population implements Concept {
 	@Id @JsonIgnore @GeneratedValue(strategy=GenerationType.IDENTITY) public Long id;
 	@Column public String conceptUrl;
 	@Transient public Map<String, Object> conceptProperties;

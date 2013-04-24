@@ -18,22 +18,22 @@ import org.springframework.stereotype.Service;
 @Service("openIdAuthenticationFailureHandler")
 @SuppressWarnings("deprecation")
 public class OpenIdAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
-	public boolean openIdNotFound(AuthenticationException exception) {
+	public boolean openIdNotFound(final AuthenticationException exception) {
 		if (exception instanceof UsernameNotFoundException) {
-			Authentication auth = exception.getAuthentication();
+			final Authentication auth = exception.getAuthentication();
 			if (auth instanceof OpenIDAuthenticationToken) {
 				return ((OpenIDAuthenticationToken) auth).getStatus().equals(OpenIDAuthenticationStatus.SUCCESS);
 			}
 		}
 		return false;
 	}
-	
+
 	@Override
-	public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception)
+	public void onAuthenticationFailure(final HttpServletRequest request, final HttpServletResponse response, final AuthenticationException exception)
 	throws IOException, ServletException {
 		if (openIdNotFound(exception)) {
-			OpenIDAuthenticationToken token = (OpenIDAuthenticationToken) exception.getAuthentication();
-			DefaultRedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
+			final OpenIDAuthenticationToken token = (OpenIDAuthenticationToken) exception.getAuthentication();
+			final DefaultRedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 			request.getSession(true).setAttribute("USER_OPENID_CREDENTIAL", token.getIdentityUrl());
 			redirectStrategy.sendRedirect(request, response, "/auth/register?auto=1");
 		} else {

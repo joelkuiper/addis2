@@ -30,55 +30,56 @@ public class ProjectsController {
 	@Autowired private UserRepository d_users;
 	@Autowired private TrialverseService d_trialverseService;
 
-	private User getActiveUser(Principal principal) { 
+	private User getActiveUser(final Principal principal) {
 		return d_users.findByOpenid(principal.getName());
 	}
-	
-	private boolean userIsAuthorized (User owner, Principal principal) { 
+
+	private boolean userIsAuthorized (final User owner, final Principal principal) {
 		if (!getActiveUser(principal).equals(owner)) {
 			throw new AccessDeniedException("Unauthorized access to project");
 		}
 		return true;
 	}
-	
+
+
 	@RequestMapping(method = RequestMethod.GET)
-	public String list(Model model, Principal principal) {
-		User user = getActiveUser(principal);
+	public String list(final Model model, final Principal principal) {
+		final User user = getActiveUser(principal);
 		model.addAttribute("projects", d_projects.findByOwner(user));
 		return "projects/list";
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST)
-	public String create(Principal principal) {
+	public String create(final Principal principal) {
 		Project project = new Project();
 		project.owner = getActiveUser(principal);
 		project.population = new Population();
 		project = d_projects.save(project);
 		return "redirect:/projects/" + project.id + "/edit";
 	}
-	
-	
+
+
 	@Transactional
 	@ResponseBody
 	@RequestMapping(value="/{id}", method = RequestMethod.GET, produces = {"application/json"})
-	public Project get(Principal principal, ModelMap model, @PathVariable Long id) {
-		Project project = d_projects.findOne(id);
-		for (Intervention intervention : project.interventions) {
+	public Project get(final Principal principal, final ModelMap model, @PathVariable final Long id) {
+		final Project project = d_projects.findOne(id);
+		for (final Intervention intervention : project.interventions) {
 			d_trialverseService.fetchConceptProperties(intervention);
 		}
-		for (Outcome outcome : project.outcomes) {
+		for (final Outcome outcome : project.outcomes) {
 			d_trialverseService.fetchConceptProperties(outcome);
 		}
 		d_trialverseService.fetchConceptProperties(project.population);
 		return project;
 	}
-	
+
 	@RequestMapping(value="/{id}", method = RequestMethod.POST, consumes = {"application/json"})
-	public String edit(Principal principal,
-			@PathVariable Long id, 
-			@RequestBody Project project) {
-		Project existing = d_projects.findOne(id);
-		if(userIsAuthorized(existing.owner, principal)) { 
+	public String edit(final Principal principal,
+			@PathVariable final Long id,
+			@RequestBody final Project project) {
+		final Project existing = d_projects.findOne(id);
+		if(userIsAuthorized(existing.owner, principal)) {
 			existing.description = project.description;
 			existing.shortName = project.shortName;
 			existing.population.conceptUrl = project.population.conceptUrl;
@@ -88,31 +89,31 @@ public class ProjectsController {
 		}
 		return "redirect:/projects/" + id;
 	}
-	
+
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE, consumes = {"application/json"})
 	@ResponseBody
-	public String delete(Principal principal,
-			@PathVariable Long id) {
-		Project existing = d_projects.findOne(id);
-		if(userIsAuthorized(existing.owner, principal)) { 
+	public String delete(final Principal principal,
+			@PathVariable final Long id) {
+		final Project existing = d_projects.findOne(id);
+		if(userIsAuthorized(existing.owner, principal)) {
 			d_projects.delete(existing);
 		}
 		return "redirect:/projects/";
 	}
-	
+
 	@RequestMapping(value="/{id}/edit", method = RequestMethod.GET)
-	public String editForm(Principal principal, ModelMap model, @PathVariable Long id) {
-		Project project = d_projects.findOne(id);
-		if(userIsAuthorized(project.owner, principal)) { 
+	public String editForm(final Principal principal, final ModelMap model, @PathVariable final Long id) {
+		final Project project = d_projects.findOne(id);
+		if(userIsAuthorized(project.owner, principal)) {
 			model.addAttribute("projectName", project.shortName);
 		}
 		return "projects/edit";
 	}
-	
+
 	@RequestMapping(value="/{id}/studies", method = RequestMethod.GET, produces =  {"text/html"})
-	public String studiesForm(Principal principal, ModelMap model, @PathVariable Long id) {
-		Project project = d_projects.findOne(id);
-		if(userIsAuthorized(project.owner, principal)) { 
+	public String studiesForm(final Principal principal, final ModelMap model, @PathVariable final Long id) {
+		final Project project = d_projects.findOne(id);
+		if(userIsAuthorized(project.owner, principal)) {
 			model.addAttribute("projectName", project.shortName);
 		}
 		return "projects/studies";

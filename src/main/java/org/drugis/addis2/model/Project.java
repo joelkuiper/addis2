@@ -19,7 +19,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 
 @Entity
-public @Data class Project {
+@Data public class Project {
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY) public Long id;
 	@ManyToOne @JsonIgnore public User owner;
 	@Column public String shortName;

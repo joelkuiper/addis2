@@ -1,6 +1,7 @@
 package org.drugis.addis2.view.helper;
 
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.servlet.support.RequestContext;
@@ -20,7 +21,10 @@ public class FormProcessor extends AbstractAttrProcessor {
 	}
 
 	@Override
-	protected ProcessorResult processAttribute(Arguments arguments, Element element, String attributeName) {
+	protected ProcessorResult processAttribute(
+			final Arguments arguments,
+			final Element element,
+			final String attributeName) {
 		if (element.getNormalizedName() != "form") {
 			throw new TemplateProcessingException("Form annontation must be used on a form element");
 		}
@@ -31,21 +35,26 @@ public class FormProcessor extends AbstractAttrProcessor {
 		return ProcessorResult.OK;
 	}
 
-	private void addExtraHiddenFields(Arguments arguments, Element element) {
+	private void addExtraHiddenFields(
+			final Arguments arguments,
+			final Element element) {
 		final RequestContext requestContext = (RequestContext) arguments.getContext().getVariables()
 				.get(SpringContextVariableNames.SPRING_REQUEST_CONTEXT);
-		HttpServletRequest request = ((IWebContext) (arguments.getContext())).getHttpServletRequest();
+		final HttpServletRequest request = ((IWebContext) (arguments.getContext())).getHttpServletRequest();
 
-		Map<String, String> extraHiddenFields = requestContext.getRequestDataValueProcessor().getExtraHiddenFields(
+		final Map<String, String> extraHiddenFields = requestContext.getRequestDataValueProcessor().getExtraHiddenFields(
 				request);
 
-		for (Map.Entry<String, String> hidden : extraHiddenFields.entrySet()) {
+		for (final Map.Entry<String, String> hidden : extraHiddenFields.entrySet()) {
 			addHidden(element, hidden.getKey(), hidden.getValue());
 		}
 	}
 
-	private void addHidden(Element form, String name, String value) {
-		Element hiddenElement = new Element("input");
+	private void addHidden(
+			final Element form,
+			final String name,
+			final String value) {
+		final Element hiddenElement = new Element("input");
 		hiddenElement.setAttribute("type", "hidden");
 		hiddenElement.setAttribute("name", name);
 		hiddenElement.setAttribute("value", value);

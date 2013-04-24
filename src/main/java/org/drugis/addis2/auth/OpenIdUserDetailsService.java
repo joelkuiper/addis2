@@ -13,13 +13,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service("openIdUserDetailsService") 
+@Service("openIdUserDetailsService")
 @Transactional(readOnly = true)
 public class OpenIdUserDetailsService implements UserDetailsService {
 	@Autowired private UserRepository d_users;
-	
-	public UserDetails loadUserByUsername(String openid) throws UsernameNotFoundException, DataAccessException {
-		User user = d_users.findByOpenid(openid);
+
+	public UserDetails loadUserByUsername(final String openid) throws UsernameNotFoundException, DataAccessException {
+		final User user = d_users.findByOpenid(openid);
 		if (user == null) {
 			throw new UsernameNotFoundException("OpenID '" + openid + "'not found.");
 		}
