@@ -17,7 +17,7 @@
   	
   	<div ng-repeat="study in studies">
 	  	<dl class="dl-horizontal">
-		    <dt>{{study.name}}</dt>
+		    <dt><span title="{{study.name}}">{{study.name}}</span></dt>
 		    <dd>{{study.title}}
 		    	<ul>
 		    		<li ng-repeat="arm in study.arms" ng-show="!$first">
