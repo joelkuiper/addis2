@@ -162,6 +162,10 @@ public class TrialverseProxyController {
 			final Map<String, Object> mm = filtered.iterator().next();
 			final String mmName = (String) mm.get("name");
 
+			final List<Map<String, Object>> measurements = d_rest.getForObject(
+					"{trialverse}/studies/{studyId}/measurements?variable={var}&measurementMoment={mm}",
+					List.class, d_trialverse, studyId, getUUIDFromURI(variable), mmName);
+
 			// Determine the intervention for each Arm
 			final String epochName = (String) mm.get("epochName");
 			final List<Map<String, Object>> arms = (List<Map<String, Object>>) study.get("arms");
@@ -188,7 +192,7 @@ public class TrialverseProxyController {
 				}
 				final String activityName = (String) design.iterator().next().get("activityName");
 
-				// Determine the invervention from the activity
+				// Determine the intervention from the activity
 				final Collection<Map<String, Object>> activity = Collections2.filter(activities,
 						new Predicate<Map<String, Object>>() {
 					@Override
@@ -208,18 +212,31 @@ public class TrialverseProxyController {
 						if (interventionURIs.contains(drug)) {
 							armInterventions.put(armName, drug.toString());
 						}
-					} catch (final URISyntaxException e) {
-					}
+					} catch (final URISyntaxException e) {}
 				}
-			}
 
-			final List<Map<String, Object>> measurements = d_rest.getForObject(
-					"{trialverse}/studies/{studyId}/measurements?variable={var}&measurementMoment={mm}",
-					List.class, d_trialverse, studyId, getUUIDFromURI(variable), mmName);
-			for (final Map<String, Object> m : measurements) {
-				m.put("intervention", armInterventions.get(m.get("armName")));
+				final Collection<Map<String, Object>> armMeasurements = Collections2.filter(measurements,
+						new Predicate<Map<String, Object>>() {
+					@Override
+					public boolean apply(final Map<String, Object> input) {
+						return armName.equals(input.get("armName"));
+					}
+				});
+				final Map<String, Object> armMeasurement = new HashMap<>();
+				for (final Map<String, Object> m : armMeasurements) {
+					if (m.get("integerValue") != null) {
+						m.put((String)m.get("attribute"), m.get("integerValue"));
+					} else if (m.get("realValue") != null) {
+						m.put((String)m.get("attribute"), m.get("realValue"));
+					}
+					m.remove("attribute");
+					m.remove("integerValue");
+					m.remove("realValue");
+					armMeasurement.putAll(m);
+				}
+				armMeasurement.put("intervention", armInterventions.get(armName));
+				allMeasurements.add(armMeasurement);
 			}
-			allMeasurements.addAll(measurements);
 		}
 
 		return allMeasurements;
