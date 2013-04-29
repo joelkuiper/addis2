@@ -41,7 +41,6 @@ public class ProjectsController {
 		return true;
 	}
 
-
 	@RequestMapping(method = RequestMethod.GET)
 	public String list(final Model model, final Principal principal) {
 		final User user = getActiveUser(principal);
@@ -57,7 +56,6 @@ public class ProjectsController {
 		project = d_projects.save(project);
 		return "redirect:/projects/" + project.id + "/edit";
 	}
-
 
 	@Transactional
 	@ResponseBody
@@ -110,13 +108,22 @@ public class ProjectsController {
 		return "projects/edit";
 	}
 
-	@RequestMapping(value="/{id}/studies", method = RequestMethod.GET, produces =  {"text/html"})
+	@RequestMapping(value="/{id}/studies", method = RequestMethod.GET, produces = {"text/html"})
 	public String studiesForm(final Principal principal, final ModelMap model, @PathVariable final Long id) {
 		final Project project = d_projects.findOne(id);
 		if(userIsAuthorized(project.owner, principal)) {
 			model.addAttribute("projectName", project.shortName);
 		}
 		return "projects/studies";
+	}
+
+	@RequestMapping(value="/{id}/analyses", method = RequestMethod.GET, produces = {"text/html"})
+	public String analysesForm(final Principal principal, final ModelMap model, @PathVariable final Long id) {
+		final Project project = d_projects.findOne(id);
+		if(userIsAuthorized(project.owner, principal)) {
+			model.addAttribute("projectName", project.shortName);
+		}
+		return "projects/analyses";
 	}
 
 }
