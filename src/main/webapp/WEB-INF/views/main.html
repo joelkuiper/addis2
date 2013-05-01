@@ -53,16 +53,20 @@
 	<script th:src="@{/resources/js/vendor/angular-ui.min.js}" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>
 	<script th:src="@{/resources/js/vendor/select2.min.js}" src="//cdnjs.cloudflare.com/ajax/libs/select2/3.3.2/select2.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
-	
+		
 	<script th:inline="javascript">
 	/*<![CDATA[*/
 	    window.config = {};
 		window.config.dataUrl = [[@{/data}]];
+		window.config.gemtcUrl = [[${#ctx.applicationContext.getBean('settings')['gemtc.url']}]];
 	/*]]>*/
 	</script>
-	<script th:src="@{/resources/js/app.js}"></script>
+
 	<script th:src="@{/resources/js/services.js}"></script>
+	<script th:src="@{/resources/js/filters.js}"></script>
 	<script th:src="@{/resources/js/directives.js}"></script>
+	<script th:src="@{/resources/js/app.js}"></script>
+	
 </footer>
 
 </body>

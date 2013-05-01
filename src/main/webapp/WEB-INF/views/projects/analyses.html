@@ -20,10 +20,10 @@
   			<th>Study</th>
   			<th>Arm</th>
   			<th>Intervention</th>
-  			<th ng-show="measurements[0]['rate']">Rate</th>
-  			<th ng-show="measurements[0]['mean']">Mean</th>
-  			<th ng-show="measurements[0]['standard deviation']">Standard deviation</th>
-  			<th ng-show="measurements[0]['sample size']">Sample size</th>
+  			<th ng-show="type == 'dichotomous'">Rate</th>
+  			<th ng-show="type == 'continuous'">Mean</th>
+  			<th ng-show="type == 'continuous'">Standard deviation</th>
+  			<th>Sample size</th>
   		</tr>
   		</thead>
   		<tbody>
@@ -31,14 +31,42 @@
   			<td>{{measurement.studyId}}</td>
   			<td>{{measurement.armName}}</td>
   			<td>{{interventions[measurement.intervention].name}}</td>
-  			<td ng-show="measurement['rate']">{{measurement['rate']}}</td>
-  			<td ng-show="measurement['mean']">{{measurement['mean']}}</td>
-  			<td ng-show="measurement['standard deviation']">{{measurement['standard deviation']}}</td>
-  			<td ng-show="measurement['sample size']">{{measurement['sample size']}}</td>
+  			<td ng-show="type == 'dichotomous'">{{measurement['rate']}}</td>
+  			<td ng-show="type == 'continuous'">{{measurement['mean']}}</td>
+  			<td ng-show="type == 'continuous'">{{measurement['standard deviation']}}</td>
+  			<td>{{measurement['sample size']}}</td>
   		</tr>
   		</tbody>
-  	</table>
-
+  	</table> 
+  	
+  	<div ng-repeat="(analysis, results) in results.results">
+  		<h3>{{analysis}}</h3>
+        <div ng-repeat="data in results" ng-show="!$first">
+          <div ng-show="data">
+            <h4>{{data.name | uppercase}}</h4>
+            <p>{{data.description}}</p>
+            <img ng-src="{{data.url}}" ng-show="data.url" />
+            <table ng-show="data.data" class="table table-bordered table-condensed table-striped">
+              <thead>
+                <tr ng-repeat="(row, cols) in data.data" ng-show="$first">
+                  <td>&nbsp;</td>
+                  <td ng-repeat="(name, col) in cols">{{name}}</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="(row, cols) in data.data">
+                  <td>{{row}}</td>
+                  <td ng-repeat="(name, col) in cols">{{col | precision: 3}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+ 	</div>
+  	<button ng-click="runGeMTC()">Run!</button>
+  	
+  	
+  	
 	<footer th:include="main::footer"></footer>
 </div>
 <script th:src="@{/resources/js/controllers/analyses_controller.js}"></script>
