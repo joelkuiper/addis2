@@ -25,7 +25,7 @@
 
 <div class="navbar" th:fragment="navigation">
 	<div class="navbar-inner">
-		<a class="brand" href="#">ADDIS 2.0</a>
+		<a class="brand" th:href="@{/}">ADDIS 2.0</a>
 		<ul class="nav">
 			<li><a th:href="@{/}">Home</a></li>
 			<li sec:authorize-url="@{/projects}"><a th:href="@{/projects}">Projects</a></li>

@@ -1,75 +1,167 @@
 <!DOCTYPE html>
-<html ng-app="addis" xmlns:th="http://www.thymeleaf.org" 
-	th:with="pageTitle='Project: ' + (${projectName}?: 'untitled')">
+<html ng-app="addis" xmlns:th="http://www.thymeleaf.org" th:with="pageTitle='Project: ' + (${projectName}?: 'untitled')">
 <head th:include="main::head"></head>
-
 <body ng-controller="AnalysesController">
-<div class="container-fluid">
-	<div th:substituteby="main::navigation"></div>
-
-	<h2 th:text="${pageTitle}"></h2>
-	<div ng-repeat="alert in alerts" ng-cloak="">
-	  	<div class="{{alert.type}} alert">{{alert.msg}}<a href="#" class="close" data-dismiss="alert">&times;</a></div>
-  	</div>
-  	
-  	<div th:include="projects/edit :: [//div[@id='project-navigation']]" th:with="activeTab='analyses'"></div>
-
-  	<table class="table table-condensed">
-  	<thead>
-  		<tr>
-  			<th>Study</th>
-  			<th>Arm</th>
-  			<th>Intervention</th>
-  			<th ng-show="type == 'dichotomous'">Rate</th>
-  			<th ng-show="type == 'continuous'">Mean</th>
-  			<th ng-show="type == 'continuous'">Standard deviation</th>
-  			<th>Sample size</th>
-  		</tr>
-  		</thead>
-  		<tbody>
-  		<tr ng-repeat="measurement in measurements">
-  			<td>{{measurement.studyId}}</td>
-  			<td>{{measurement.armName}}</td>
-  			<td>{{interventions[measurement.intervention].name}}</td>
-  			<td ng-show="type == 'dichotomous'">{{measurement['rate']}}</td>
-  			<td ng-show="type == 'continuous'">{{measurement['mean']}}</td>
-  			<td ng-show="type == 'continuous'">{{measurement['standard deviation']}}</td>
-  			<td>{{measurement['sample size']}}</td>
-  		</tr>
-  		</tbody>
-  	</table> 
-  	
-  	<div ng-repeat="(analysis, results) in results.results">
-  		<h3>{{analysis}}</h3>
-        <div ng-repeat="data in results" ng-show="!$first">
-          <div ng-show="data">
-            <h4>{{data.name | uppercase}}</h4>
-            <p>{{data.description}}</p>
-            <img ng-src="{{data.url}}" ng-show="data.url" />
-            <table ng-show="data.data" class="table table-bordered table-condensed table-striped">
+  <div class="container-fluid">
+    <div th:substituteby="main::navigation"></div>
+    <h2 th:text="${pageTitle}"></h2>
+    <div ng-repeat="alert in alerts" ng-cloak="">
+      <div class="{{alert.type}} alert">
+        {{alert.msg}}<a href="#" class="close" data-dismiss="alert">&times;</a>
+      </div>
+    </div>
+    <div th:include="projects/edit :: [//div[@id='project-navigation']]" th:with="activeTab='analyses'"></div>
+    <div class="row">
+      <div class="accordion span6" id="accordion">
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#studyData">Show study
+              data</a>
+          </div>
+          <div id="studyData" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <table class="table table-condensed">
+                <thead>
+                  <tr>
+                    <th>Study</th>
+                    <th>Arm</th>
+                    <th>Intervention</th>
+                    <th ng-show="type == 'dichotomous'">Rate</th>
+                    <th ng-show="type == 'continuous'">Mean</th>
+                    <th ng-show="type == 'continuous'">Standard deviation</th>
+                    <th>Sample size</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="measurement in measurements">
+                    <td>{{measurement.studyId}}</td>
+                    <td>{{measurement.armName}}</td>
+                    <td>{{interventions[measurement.intervention].name}}</td>
+                    <td ng-show="type == 'dichotomous'">{{measurement['rate']}}</td>
+                    <td ng-show="type == 'continuous'">{{measurement['mean']}}</td>
+                    <td ng-show="type == 'continuous'">{{measurement['standard deviation']}}</td>
+                    <td>{{measurement['sample size']}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- /#studyData -->
+        </div>
+        <div class="accordion-group">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#settings">Show MCMC settings</a>
+          </div>
+          <div id="settings" class="accordion-body collapse">
+            <div class="accordion-inner">
+              <label>Number of iterations</label><input type="number" ng-model="params.n_iter" placeholder="20000" /><br />
+              <label>Number of adapt iterations</label><input type="number" ng-model="params.n_adapt" placeholder="5000" /><br />
+              <label>Factor</label><input type="number" ng-model="params.factor" placeholder="2.5" /><br />
+              <label>Thinning</label><input type="number" ng-model="params.thin" placeholder="1" />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="span5 offset1">
+        <div ng-show="analysis.job" class="{{analysis.job.data.status}} well">
+          <button type="button" class="close" ng-click="cancel(analysis.job.data.jobUUID)" tooltip="Cancel job">&times;</button>
+          <strong>Status:</strong> {{analysis.job.data.status}}<br /> <span ng-show="analysis.job.data.completed.date">
+            <strong>Finished at:</strong> {{analysis.job.data.completed.date}}<br />
+          </span> <span ng-show="analysis.job.data.cause"><strong>Cause:</strong> {{analysis.job.data.cause}}<br /></span>
+        </div>
+        <button class="btn btn-primary" ng-click="runGeMTC()">Run analysis</button>
+        <pre ng-show="false">{{consistency|json}}</pre>
+      </div>
+    </div>
+    <div class="row" ng-show="consistency">
+      <div class="span12">
+      <h4>Results</h4>
+      <p>Results of the consistency model.</p>
+        <!-- 
+        <div ng-repeat="(analysis, results) in results.results">
+          <h3>{{analysis}}</h3>
+          <div ng-repeat="data in results" ng-show="!$first">
+            <div ng-show="data">
+              <h4>{{data.name | uppercase}}</h4>
+              <p>{{data.description}}</p>
+              <img ng-src="{{data.url}}" ng-show="data.url" />
+              <table ng-show="data.data" class="table table-bordered table-condensed table-striped">
+                <thead>
+                  <tr ng-repeat="(row, cols) in data.data" ng-show="$first">
+                    <td>&nbsp;</td>
+                    <td ng-repeat="(name, col) in cols">{{name}}</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="(row, cols) in data.data">
+                    <td>{{row}}</td>
+                    <td ng-repeat="(name, col) in cols">{{col | precision: 3}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div> -->
+        <div class="row">
+          <div class="span6">
+            <h5>Convergence Diagnostics</h5>
+          
+            <p><em>PSRF table:</em> {{consistency['psrf'].description}}</p>
+            <table class="table table-bordered table-condensed table-striped">
               <thead>
-                <tr ng-repeat="(row, cols) in data.data" ng-show="$first">
+                <tr ng-repeat="(row, cols) in consistency['psrf'].data" ng-show="$first">
                   <td>&nbsp;</td>
                   <td ng-repeat="(name, col) in cols">{{name}}</td>
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="(row, cols) in data.data">
+                <tr ng-repeat="(row, cols) in consistency['psrf'].data">
                   <td>{{row}}</td>
                   <td ng-repeat="(name, col) in cols">{{col | precision: 3}}</td>
                 </tr>
               </tbody>
             </table>
+          </div> <!-- /.span6 (psrf) -->
+        </div> <!-- /.row -->
+        <div class="row">
+          <div class="span12">
+            <h5>Summary</h5>
+            <div class="row">
+              <div class="span5">
+                <img ng-src="{{consistency['forest_plot'].url}}" />
+                <p>
+                  <em>Forest plot: </em> {{consistency['forest_plot'].description}}
+                </p>
+              </div>
+              <div class="span5 offset1">
+                <img ng-src="{{consistency['ranks_plot'].url}}" />
+                <p>
+                  <em>Rank plot: </em> {{consistency['ranks_plot'].description}}
+                </p>
+              </div>
+            </div>
+          <div class="row">
+            <div class="span10">
+            <style>.re-treatment { background-color: #F9F9F9; font-weight: bold; }</style>
+            <table class="table table-bordered table-condensed">
+              <tr ng-repeat="treatment1 in consistency.treatments.data">
+                <td ng-repeat="treatment2 in consistency.treatments.data" ng-class="{'re-treatment': treatment1.id == treatment2.id}">
+                  <span ng-show="treatment1.id == treatment2.id">{{treatment1.description}}</span>
+                  <span ng-init="re = consistency['relative_effects'].data[treatment1.id][treatment2.id]" ng-show="re">
+                    {{re['50%'] | precision: 3}} ({{re['2.5%'] | precision: 3}}, {{re['97.5%'] | precision: 3}})
+                  </span>
+                </td>
+              </tr>
+            </table>
+            <p><em>{{consistency['relative_effects'].description}}</em></p>
+            </div>
+          </div>
           </div>
         </div>
- 	</div>
-  	<button ng-click="runGeMTC()">Run!</button>
-  	
-  	
-  	
-	<footer th:include="main::footer"></footer>
-</div>
-<script th:src="@{/resources/js/controllers/analyses_controller.js}"></script>
-
+      </div> <!-- /.span12 -->
+    </div> <!-- /.row -->
+  </div>
+  <footer th:include="main::footer"></footer>
+  <script th:src="@{/resources/js/controllers/analyses_controller.js}"></script>
 </body>
 </html>

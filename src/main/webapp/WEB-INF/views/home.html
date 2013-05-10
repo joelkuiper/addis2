@@ -6,10 +6,12 @@
 <div class="container-fluid">
 	<div th:substituteby="main::navigation"></div>
 
-	<h1>Hello world!</h1>
-	
-	<p th:inline="text">The time on the server is [[${serverTime}]].</p>
-	
+	<h1>Aggregate Data Drug Information System</h1>
+   
+	<p sec:authorize="!isAuthenticated()">Please <a th:href="@{/auth/login}">log in</a> to proceed.</p>
+	<p sec:authorize="isAuthenticated()">Welcome to ADDIS 2.0!
+    <a th:href="@{/projects}">Proceed to projects.</a></p>
+  
 	<p></p>
 	</div>
 <footer th:include="main::footer"></footer>

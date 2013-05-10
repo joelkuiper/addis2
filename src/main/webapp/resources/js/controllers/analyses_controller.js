@@ -28,7 +28,23 @@ app.controller('AnalysesController', function($scope, $http, Jobs) {
 	
 	
 	$scope.$on('completedAnalysis', function(e, job) {
-		$scope.results = job.results;
+		var results = job.results.results.consistency;
+		results = _.object(_.map(results, function(x) { return x.name; }), results);
+		function rewrite(data) {
+			var map = {};
+			_.each(data, function(element, name) {
+				var names = name.split(".");
+				if (names.length == 3) {
+					if (!map[names[1]]) {
+						map[names[1]] = {};
+					}
+					map[names[1]][names[2]] = element;
+				}
+			});
+			return map;
+		}
+		results['relative_effects'].data = rewrite(results['relative_effects'].data);
+		$scope.consistency = results;
 	});
 
 	$scope.runGeMTC = function() {
@@ -49,10 +65,11 @@ app.controller('AnalysesController', function($scope, $http, Jobs) {
 		});
 		
 		var run = function(type) {
+			var params = _.extend($scope.params, {network: {data: data}});
 			$.ajax({
 				url: config.gemtcUrl + type.toLowerCase(),
 				type: 'POST',
-				data: JSON.stringify({network: {data: data}}),
+				data: JSON.stringify(params),
 				dataType: "json",
 				contentType: 'application/json',
 				success: function(responseJSON, textStatus, jqXHR) {
