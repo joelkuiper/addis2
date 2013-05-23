@@ -11,6 +11,7 @@
       </div>
     </div>
     <div th:include="projects/edit :: [//div[@id='project-navigation']]" th:with="activeTab='analyses'"></div>
+    
     <div class="row">
       <div class="accordion span6" id="accordion">
         <div class="accordion-group">
@@ -63,11 +64,10 @@
         </div>
       </div>
       <div class="span5 offset1">
-        <div ng-show="analysis.job" class="{{analysis.job.data.status}} well">
-          <button type="button" class="close" ng-click="cancel(analysis.job.data.jobUUID)" tooltip="Cancel job">&times;</button>
-          <strong>Status:</strong> {{analysis.job.data.status}}<br /> <span ng-show="analysis.job.data.completed.date">
-            <strong>Finished at:</strong> {{analysis.job.data.completed.date}}<br />
-          </span> <span ng-show="analysis.job.data.cause"><strong>Cause:</strong> {{analysis.job.data.cause}}<br /></span>
+        <div ng-show="status" class="{{status.status}} well">
+          <strong>Status:</strong> {{status.status}}<br /> <span ng-show="status.completed">
+            <strong>Finished at:</strong> {{status.completed}}<br />
+          </span> <span ng-show="status.cause"><strong>Cause:</strong> {{status.cause}}<br /></span>
         </div>
         <button class="btn btn-primary" ng-click="runGeMTC()">Run analysis</button>
         <pre ng-show="false">{{consistency|json}}</pre>
@@ -77,45 +77,24 @@
       <div class="span12">
       <h4>Results</h4>
       <p>Results of the consistency model.</p>
-        <!-- 
-        <div ng-repeat="(analysis, results) in results.results">
-          <h3>{{analysis}}</h3>
-          <div ng-repeat="data in results" ng-show="!$first">
-            <div ng-show="data">
-              <h4>{{data.name | uppercase}}</h4>
-              <p>{{data.description}}</p>
-              <img ng-src="{{data.url}}" ng-show="data.url" />
-              <table ng-show="data.data" class="table table-bordered table-condensed table-striped">
-                <thead>
-                  <tr ng-repeat="(row, cols) in data.data" ng-show="$first">
-                    <td>&nbsp;</td>
-                    <td ng-repeat="(name, col) in cols">{{name}}</td>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr ng-repeat="(row, cols) in data.data">
-                    <td>{{row}}</td>
-                    <td ng-repeat="(name, col) in cols">{{col | precision: 3}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div> -->
         <div class="row">
           <div class="span6">
             <h5>Convergence Diagnostics</h5>
           
-            <p><em>PSRF table:</em> {{consistency['psrf'].description}}</p>
+            <p><em>PSRF table:</em>
+            The <em>potential scale reduction</em> factor is calculated for each
+            variable in <em>x</em>, together with upper and lower confidence limits.
+            Approximate convergence is diagnosed when the upper limit is close to 1.
+            </p>
             <table class="table table-bordered table-condensed table-striped">
               <thead>
-                <tr ng-repeat="(row, cols) in consistency['psrf'].data" ng-show="$first">
+                <tr ng-repeat="(row, cols) in consistency.body['psrf']" ng-show="$first">
                   <td>&nbsp;</td>
                   <td ng-repeat="(name, col) in cols">{{name}}</td>
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="(row, cols) in consistency['psrf'].data">
+                <tr ng-repeat="(row, cols) in consistency.body['psrf']">
                   <td>{{row}}</td>
                   <td ng-repeat="(name, col) in cols">{{col | precision: 3}}</td>
                 </tr>
@@ -128,15 +107,23 @@
             <h5>Summary</h5>
             <div class="row">
               <div class="span5">
-                <img ng-src="{{consistency['forest_plot'].url}}" />
+                <object width="350" height="350" data="{{consistency['_embedded']['_files'].forest_vec.href}}" type="image/svg+xml">
+                  <img ng-src="{{consistency['_embedded']['_files'].forest.href}}" />
+                </object>
                 <p>
-                  <em>Forest plot: </em> {{consistency['forest_plot'].description}}
+                  <em>Forest plot: </em> A forest plot for some baseline
                 </p>
               </div>
               <div class="span5 offset1">
-                <img ng-src="{{consistency['ranks_plot'].url}}" />
+                <object width="350" height="350" data="{{consistency['_embedded']['_files'].ranks_vec.href}}" type="image/svg+xml">
+                  <img ng-src="{{consistency['_embedded']['_files'].ranks.href}}" />
+                </object>               
                 <p>
-                  <em>Rank plot: </em> {{consistency['ranks_plot'].description}}
+                  <em>Rank plot: </em> 
+                  For each MCMC iteration, the treatments are ranked by their effect
+                  relative to an arbitrary baseline. A frequency table is
+                  constructed from these rankings and normalized by the number of
+                  iterations to give the rank probabilities.
                 </p>
               </div>
             </div>
@@ -144,16 +131,16 @@
             <div class="span10">
             <style>.re-treatment { background-color: #F9F9F9; font-weight: bold; }</style>
             <table class="table table-bordered table-condensed">
-              <tr ng-repeat="treatment1 in consistency.treatments.data">
-                <td ng-repeat="treatment2 in consistency.treatments.data" ng-class="{'re-treatment': treatment1.id == treatment2.id}">
+              <tr ng-repeat="treatment1 in consistency.body.treatments">
+                <td ng-repeat="treatment2 in consistency.body.treatments" ng-class="{'re-treatment': treatment1.id == treatment2.id}">
                   <span ng-show="treatment1.id == treatment2.id">{{treatment1.description}}</span>
-                  <span ng-init="re = consistency['relative_effects'].data[treatment1.id][treatment2.id]" ng-show="re">
+                  <span ng-init="re = consistency.body['relative_effects'][treatment1.id][treatment2.id]" ng-show="re">
                     {{re['50%'] | precision: 3}} ({{re['2.5%'] | precision: 3}}, {{re['97.5%'] | precision: 3}})
                   </span>
                 </td>
               </tr>
             </table>
-            <p><em>{{consistency['relative_effects'].description}}</em></p>
+            <p><em>Relative effects</em></p>
             </div>
           </div>
           </div>

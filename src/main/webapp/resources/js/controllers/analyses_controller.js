@@ -1,4 +1,4 @@
-app.controller('AnalysesController', function($scope, $http, Jobs) {
+app.controller('AnalysesController', ['$scope', '$http', 'clinicico.tasks', function($scope, $http, tasks) {
 	$scope.measurements = [];
 	$scope.interventions = {};
 	$scope.type = '';
@@ -21,33 +21,13 @@ app.controller('AnalysesController', function($scope, $http, Jobs) {
 			.success(function(data) { 
 				$scope.measurements = data; 
 				$scope.type = data[0].rate ? 'dichotomous' : 'continuous';
-			});
+		});
 	}
 	
 	$http.get(".").success(retrieveMeasurements);
-	
-	
-	$scope.$on('completedAnalysis', function(e, job) {
-		var results = job.results.results.consistency;
-		results = _.object(_.map(results, function(x) { return x.name; }), results);
-		function rewrite(data) {
-			var map = {};
-			_.each(data, function(element, name) {
-				var names = name.split(".");
-				if (names.length == 3) {
-					if (!map[names[1]]) {
-						map[names[1]] = {};
-					}
-					map[names[1]][names[2]] = element;
-				}
-			});
-			return map;
-		}
-		results['relative_effects'].data = rewrite(results['relative_effects'].data);
-		$scope.consistency = results;
-	});
 
 	$scope.runGeMTC = function() {
+		
 		var data = _.map($scope.measurements, function(measurement) {
 			var intervention = $scope.interventions[measurement.intervention];
 			return { 
@@ -64,25 +44,45 @@ app.controller('AnalysesController', function($scope, $http, Jobs) {
 			return !arm.treatment;
 		});
 		
-		var run = function(type) {
-			var params = _.extend($scope.params, {network: {data: data}});
-			$.ajax({
-				url: config.gemtcUrl + type.toLowerCase(),
-				type: 'POST',
-				data: JSON.stringify(params),
-				dataType: "json",
-				contentType: 'application/json',
-				success: function(responseJSON, textStatus, jqXHR) {
-					var job = Jobs.add({
-						data: responseJSON,
-						type: 'run' + type,
-						analysis: 1,
-						broadcast: 'completedAnalysis'
+		var params = _.extend($scope.params || {}, {network: {data: data}});
+		
+		var task = tasks.submit("consistency", params);
+		task.on("update", function(status) { 
+			$scope.status = status;
+		});
+		task.on("error", function(status) { 
+			$scope.status = status;
+		});
+		
+		task.results.then(function(results) {
+			function rewrite(data) {
+				var map = {};
+				_.each(data, function(element) {
+					var names = element.parameter.split(".");
+					if (names.length == 3) {
+						if (!map[names[1]]) {
+							map[names[1]] = {};
+						}
+							map[names[1]][names[2]] = _.omit(element, "parameter");
+						}
 					});
-					$scope.analysis.job = job;
-				}
-			});
-		};
-		run('Consistency');
+				return map;
+			}
+			results.body['relative_effects'] = rewrite(results.body['relative_effects']);
+			
+			var treatments = results.body['treatments'];
+			var treatmentsNew = [];
+			for(var i = 0; i < treatments.id.length; i++) { 
+				treatmentsNew[i] = {id: treatments.id[i], description: treatments.description[i] };
+			}
+			results.body['treatments'] = treatmentsNew;
+			
+			results['_embedded']['_files'] =
+			_.reduce(_.map(results['_embedded']['_files'], function(file) {
+					return _.object([file.name], [_.omit(file, "name")]);
+			}), function(memo, obj) { return _.extend(memo, obj); }, {});
+			console.log(results);
+			$scope.consistency = results;
+		});
 	};
-});
+}]);
