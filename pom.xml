@@ -75,7 +75,7 @@
 			<version>${org.aspectj-version}</version>
 		</dependency>
 
-		<!-- Logging -->
+		<!-- Logging 
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -104,7 +104,7 @@
 			<artifactId>slf4j-impl</artifactId>
 			<version>${org.apache.logging.log4j-version}</version>
 			<scope>runtime</scope>
-		</dependency>
+		</dependency> -->
 
 		<!-- @Inject -->
 		<dependency>
