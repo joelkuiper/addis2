@@ -11,7 +11,10 @@
       </div>
     </div>
     <div th:include="projects/edit :: [//div[@id='project-navigation']]" th:with="activeTab='analyses'"></div>
-    
+   <select ng-model="outcome">
+   	<option value="">-- Select outcome --</option>
+   	<option ng-repeat="(k, outcome) in outcomes" value="{{k}}">{{outcome.name}}</option>
+   </select>
     <div class="row">
       <div class="accordion span6" id="accordion">
         <div class="accordion-group">
@@ -27,20 +30,20 @@
                     <th>Study</th>
                     <th>Arm</th>
                     <th>Intervention</th>
-                    <th ng-show="type == 'dichotomous'">Rate</th>
-                    <th ng-show="type == 'continuous'">Mean</th>
-                    <th ng-show="type == 'continuous'">Standard deviation</th>
+                    <th ng-show="analyses[outcome].type == 'dichotomous'">Rate</th>
+                    <th ng-show="analyses[outcome].type == 'continuous'">Mean</th>
+                    <th ng-show="analyses[outcome].type == 'continuous'">Standard deviation</th>
                     <th>Sample size</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr ng-repeat="measurement in measurements">
+                  <tr ng-repeat="measurement in analyses[outcome].measurements">
                     <td>{{measurement.studyId}}</td>
                     <td>{{measurement.armName}}</td>
                     <td>{{interventions[measurement.intervention].name}}</td>
-                    <td ng-show="type == 'dichotomous'">{{measurement['rate']}}</td>
-                    <td ng-show="type == 'continuous'">{{measurement['mean']}}</td>
-                    <td ng-show="type == 'continuous'">{{measurement['standard deviation']}}</td>
+                    <td ng-show="analyses[outcome].type == 'dichotomous'">{{measurement['rate']}}</td>
+                    <td ng-show="analyses[outcome].type == 'continuous'">{{measurement['mean']}}</td>
+                    <td ng-show="analyses[outcome].type == 'continuous'">{{measurement['standard deviation']}}</td>
                     <td>{{measurement['sample size']}}</td>
                   </tr>
                 </tbody>
@@ -64,16 +67,16 @@
         </div>
       </div>
       <div class="span5 offset1">
-        <div ng-show="status" class="{{status.status}} well">
-          <strong>Status:</strong> {{status.status}}<br /> <span ng-show="status.completed">
-            <strong>Finished at:</strong> {{status.completed}}<br />
-          </span> <span ng-show="status.cause"><strong>Cause:</strong> {{status.cause}}<br /></span>
+        <div ng-show="analyses[outcome].status" class="{{analyses[outcome].status.status}} well">
+          <strong>Status:</strong> {{analyses[outcome].status.status}}<br /> <span ng-show="analyses[outcome].status.completed">
+            <strong>Finished at:</strong> {{analyses[outcome].status.completed}}<br />
+          </span> <span ng-show="analyses[outcome].status.cause"><strong>Cause:</strong> {{analyses[outcome].status.cause}}<br /></span>
         </div>
-        <button class="btn btn-primary" ng-click="runGeMTC()">Run analysis</button>
-        <pre ng-show="false">{{consistency|json}}</pre>
+        <button class="btn btn-primary" ng-click="runGeMTC(outcome)" ng-disabled="!analyses[outcome].measurements">Run analysis</button>
+        <pre ng-show="false">{{analyses[outcome].consistency|json}}</pre>
       </div>
     </div>
-    <div class="row" ng-show="consistency">
+    <div class="row" ng-show="analyses[outcome].consistency">
       <div class="span12">
       <h4>Results</h4>
       <p>Results of the consistency model.</p>
@@ -88,13 +91,13 @@
             </p>
             <table class="table table-bordered table-condensed table-striped">
               <thead>
-                <tr ng-repeat="(row, cols) in consistency.body['psrf']" ng-show="$first">
+                <tr ng-repeat="(row, cols) in analyses[outcome].consistency.body['psrf']" ng-show="$first">
                   <td>&nbsp;</td>
                   <td ng-repeat="(name, col) in cols">{{name}}</td>
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="(row, cols) in consistency.body['psrf']">
+                <tr ng-repeat="(row, cols) in analyses[outcome].consistency.body['psrf']">
                   <td>{{row}}</td>
                   <td ng-repeat="(name, col) in cols">{{col | precision: 3}}</td>
                 </tr>
@@ -107,16 +110,16 @@
             <h5>Summary</h5>
             <div class="row">
               <div class="span5">
-                <object width="350" height="350" data="{{consistency['_embedded']['_files'].forest_vec.href}}" type="image/svg+xml">
-                  <img ng-src="{{consistency['_embedded']['_files'].forest.href}}" />
+                <object width="350" height="350" data="{{analyses[outcome].consistency['_embedded']['_files'].forest_vec.href}}" type="image/svg+xml">
+                  <img ng-src="{{analyses[outcome].consistency['_embedded']['_files'].forest.href}}" />
                 </object>
                 <p>
                   <em>Forest plot: </em> A forest plot for some baseline
                 </p>
               </div>
               <div class="span5 offset1">
-                <object width="350" height="350" data="{{consistency['_embedded']['_files'].ranks_vec.href}}" type="image/svg+xml">
-                  <img ng-src="{{consistency['_embedded']['_files'].ranks.href}}" />
+                <object width="350" height="350" data="{{analyses[outcome].consistency['_embedded']['_files'].ranks_vec.href}}" type="image/svg+xml">
+                  <img ng-src="{{analyses[outcome].consistency['_embedded']['_files'].ranks.href}}" />
                 </object>               
                 <p>
                   <em>Rank plot: </em> 
@@ -131,10 +134,10 @@
             <div class="span10">
             <style>.re-treatment { background-color: #F9F9F9; font-weight: bold; }</style>
             <table class="table table-bordered table-condensed">
-              <tr ng-repeat="treatment1 in consistency.body.treatments">
-                <td ng-repeat="treatment2 in consistency.body.treatments" ng-class="{'re-treatment': treatment1.id == treatment2.id}">
+              <tr ng-repeat="treatment1 in analyses[outcome].consistency.body.treatments">
+                <td ng-repeat="treatment2 in analyses[outcome].consistency.body.treatments" ng-class="{'re-treatment': treatment1.id == treatment2.id}">
                   <span ng-show="treatment1.id == treatment2.id">{{treatment1.description}}</span>
-                  <span ng-init="re = consistency.body['relative_effects'][treatment1.id][treatment2.id]" ng-show="re">
+                  <span ng-init="re = analyses[outcome].consistency.body['relative_effects'][treatment1.id][treatment2.id]" ng-show="re">
                     {{re['50%'] | precision: 3}} ({{re['2.5%'] | precision: 3}}, {{re['97.5%'] | precision: 3}})
                   </span>
                 </td>

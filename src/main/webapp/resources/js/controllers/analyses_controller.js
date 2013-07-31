@@ -1,34 +1,53 @@
 app.controller('AnalysesController', ['$scope', '$http', 'clinicico.tasks', function($scope, $http, tasks) {
-	$scope.measurements = [];
 	$scope.interventions = {};
-	$scope.type = '';
-	$scope.analysis = {};
-
-	function retrieveMeasurements(data) { 
-		var populationUrl = data.population.conceptUrl; 
-		var outcomeUrls = _.pluck(data.outcomes, 'conceptUrl');
-		var interventionsUrls = _.pluck(data.interventions, 'conceptUrl');
+	$scope.outcomes = {};
+	$scope.analyses = {};
+	$scope.outcome = "";
+	
+	$scope.$watch("outcome", function(newVal) {
+		if (!newVal) return;
+		if ($scope.analyses[newVal]) {
+			$scope.consistency = $scope.analyses[newVal].consistency;
+		} else {
+			$scope.consistency = null;
+			retrieveMeasurements(newVal);
+		}
+	});
+	
+	function retrieveData(data) {
+		$scope.population = data.population;
 		
 		angular.forEach(data.interventions, function(intervention) {
 			$scope.interventions[intervention.conceptUrl] = intervention.conceptProperties;
 		});
 		
-		var baseUrl = config.dataUrl + "/measurements";
-		$http.get(baseUrl 
-				+ "?population=" + populationUrl 
-				+ "&outcome=" + outcomeUrls[0]
-				+ "&interventions=" + interventionsUrls.join())
-			.success(function(data) { 
-				$scope.measurements = data; 
-				$scope.type = data[0].rate ? 'dichotomous' : 'continuous';
+		angular.forEach(data.outcomes, function(outcome) {
+			$scope.outcomes[outcome.conceptUrl] = outcome.conceptProperties;
 		});
 	}
 	
-	$http.get(".").success(retrieveMeasurements);
-
-	$scope.runGeMTC = function() {
+	function retrieveMeasurements(outcome) {
+		if (!$scope.population || $scope.analyses[outcome]) return;
 		
-		var data = _.map($scope.measurements, function(measurement) {
+		$scope.analyses[outcome] = {};
+		var baseUrl = config.dataUrl + "/measurements";
+		var populationUrl = $scope.population.conceptUrl;
+		var interventionsUrls = _.keys($scope.interventions);
+		$http.get(baseUrl 
+				+ "?population=" + populationUrl 
+				+ "&outcome=" + outcome
+				+ "&interventions=" + interventionsUrls.join())
+			.success(function(data) { 
+				$scope.analyses[outcome].measurements = data; 
+				$scope.analyses[outcome].type = data[0].rate ? 'dichotomous' : 'continuous';
+		});
+	}
+	
+	$http.get(".").success(retrieveData);
+
+	$scope.runGeMTC = function(outcome) {
+		
+		var data = _.map($scope.analyses[outcome].measurements, function(measurement) {
 			var intervention = $scope.interventions[measurement.intervention];
 			return { 
 				study: measurement.studyId,
@@ -48,10 +67,10 @@ app.controller('AnalysesController', ['$scope', '$http', 'clinicico.tasks', func
 		
 		var task = tasks.submit("consistency", params);
 		task.on("update", function(status) { 
-			$scope.status = status;
+			$scope.analyses[outcome].status = status;
 		});
 		task.on("error", function(status) { 
-			$scope.status = status;
+			$scope.analyses[outcome].status = status;
 		});
 		
 		task.results.then(function(results) {
@@ -81,8 +100,7 @@ app.controller('AnalysesController', ['$scope', '$http', 'clinicico.tasks', func
 			_.reduce(_.map(results['_embedded']['_files'], function(file) {
 					return _.object([file.name], [_.omit(file, "name")]);
 			}), function(memo, obj) { return _.extend(memo, obj); }, {});
-			console.log(results);
-			$scope.consistency = results;
+			$scope.analyses[outcome].consistency = results;
 		});
 	};
 }]);
