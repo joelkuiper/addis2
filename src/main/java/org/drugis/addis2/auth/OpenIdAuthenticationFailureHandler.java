@@ -16,7 +16,6 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationFa
 import org.springframework.stereotype.Service;
 
 @Service("openIdAuthenticationFailureHandler")
-@SuppressWarnings("deprecation")
 public class OpenIdAuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 	public boolean openIdNotFound(final AuthenticationException exception) {
 		if (exception instanceof UsernameNotFoundException) {
