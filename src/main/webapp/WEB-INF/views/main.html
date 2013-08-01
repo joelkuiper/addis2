@@ -47,11 +47,11 @@ body {
       /*<![CDATA[*/
         window.config = {};
         window.config.dataUrl = [[@{/data}]];
-        window.config.clinicico = {};
-        window.config.clinicico.baseUrl = [[${#ctx.applicationContext.getBean('settings')['gemtc.url']}]];
+        window.clinicico.config = {};
+        window.clinicico.config.baseUrl = [[${#ctx.applicationContext.getBean('settings')['gemtc.url']}]];
       /*]]>*/
     </script>
-  
+
     <script th:src="@{/resources/js/vendor/jquery-1.9.1.js}" src="//code.jquery.com/jquery.js"></script>
     <script th:src="@{/resources/js/vendor/bootstrap.js}" src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
     <script th:src="@{/resources/js/vendor/angular.js}" src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
@@ -59,7 +59,7 @@ body {
     <script th:src="@{/resources/js/vendor/select2.min.js}" src="//cdnjs.cloudflare.com/ajax/libs/select2/3.3.2/select2.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
     <script src="//raw.github.com/joelkuiper/clinicico/develop/client/js/clinicico.js"></script>
-    
+
 
     <script th:src="@{/resources/js/services.js}"></script>
     <script th:src="@{/resources/js/filters.js}"></script>
