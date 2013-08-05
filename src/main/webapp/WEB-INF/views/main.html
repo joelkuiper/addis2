@@ -47,8 +47,7 @@ body {
       /*<![CDATA[*/
         window.config = {};
         window.config.dataUrl = [[@{/data}]];
-        window.clinicico.config = {};
-        window.clinicico.config.baseUrl = [[${#ctx.applicationContext.getBean('settings')['gemtc.url']}]];
+        window.clinicico = { config: { baseUrl: [[${#ctx.applicationContext.getBean('settings')['gemtc.url']}]] }};
       /*]]>*/
     </script>
 
@@ -58,7 +57,7 @@ body {
     <script th:src="@{/resources/js/vendor/angular-ui.min.js}" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>
     <script th:src="@{/resources/js/vendor/select2.min.js}" src="//cdnjs.cloudflare.com/ajax/libs/select2/3.3.2/select2.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
-    <script src="//raw.github.com/joelkuiper/clinicico/develop/client/js/clinicico.js"></script>
+    <script th:src="@{/resources/js/vendor/clinicico.js}"></script>
 
 
     <script th:src="@{/resources/js/services.js}"></script>

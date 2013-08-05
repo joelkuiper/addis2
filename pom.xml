@@ -75,7 +75,7 @@
 			<version>${org.aspectj-version}</version>
 		</dependency>
 
-		<!-- Logging 
+		<!-- Logging
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -120,6 +120,7 @@
 			<version>2.5</version>
 			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
@@ -220,7 +221,7 @@
 		</dependency>
 
 
-		<!-- Cglib is a powerful, high performance and quality Code Generation 
+		<!-- Cglib is a powerful, high performance and quality Code Generation
 			Library, It is used to extend JAVA classes and implements interfaces at runtime. -->
 		<dependency>
 			<groupId>cglib</groupId>
@@ -322,7 +323,7 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
-				<!--This plugin's configuration is used to store Eclipse m2e settings 
+				<!--This plugin's configuration is used to store Eclipse m2e settings
 					only. It has no influence on the Maven build itself. -->
 				<plugin>
 					<groupId>org.eclipse.m2e</groupId>
